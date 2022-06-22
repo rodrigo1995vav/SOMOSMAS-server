@@ -1,4 +1,5 @@
 const authService = require('../services/auth-service')
+const { body, validationResult } = require('express-validator');
 
 const login = async (req, res, next) => {
     try {

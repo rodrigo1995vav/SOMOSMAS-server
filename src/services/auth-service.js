@@ -6,12 +6,16 @@ const authRepository = require('../repositories/auth-repository')
 
 const login = async (body) => {
     const user = await authRepository.getByEmail(body.email)
-    return bcrypt.compareSync(body.password, user.password)
+    if (bcrypt.compareSync(body.password, user.password)) {
+        return user
+    } else {
+        throw "Incorrect password"
+    }
 
 }
 
 
 
-module.exports={
+module.exports = {
     login
 }

@@ -7,10 +7,4 @@ router.get("/users");
 router.post("/login", userController.login)
 
 
-
-router.get("/aa", async (req, res)=>{
-    const pass = bcrypt.hashSync("1234", 10)
-    res.json(pass)
-    })
-
 module.exports = router;
