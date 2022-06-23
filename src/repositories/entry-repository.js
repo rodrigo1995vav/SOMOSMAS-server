@@ -17,16 +17,7 @@ const saveEntry = async (newEntry) => {
       return entry
 }
 
-const getEntryMocked = async (id) =>{
-    return {id: id, name:'test name', content:'any', categoryId:2 , type: 'news'}
-}
-const saveEntryMocked = async (newEntry) => {
-
-    return {id: newEntry.id, name:newEntry.name, content:newEntry.content, categoryId:newEntry.categoryId , type: newEntry.type}
-}
 module.exports = {
     getEntryById,
-    getEntryMocked,
     saveEntry,
-    saveEntryMocked,
 }

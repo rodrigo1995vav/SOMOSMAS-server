@@ -15,40 +15,36 @@ class EntryDto {
 
     validate(){
       
-        const msg = '';
+        let msg = '';
        
-        if(!this.name) msg = msg +' Título';
+        if(!this.name) msg = msg +' Título,';
           
-        if(!this.image) msg = msg+' Imagen';
+        if(!this.image) msg = msg+' Imagen,';
           
-        if(!this.content) msg = msg +' Contenido';
+        if(!this.content) msg = msg +' Contenido,';
          
-        if(!this.categoryId) msg = msg +' Categoría';
-      
+        if(!this.categoryId) msg = msg +' Categoría,';
+        
         if(msg!==''){
-            throw new Error ( `Llenar campos vacíos:${msg}` );
+            const finalMsg = msg.slice(0, -1)
+            throw new Error ( `Llenar campos vacíos:${finalMsg}.` );
         }
     }
 }
 
 const updateNewsEntry = async (req,res,next)=>{
-
    
     const newsEntryDto = new EntryDto ({...req.body, id: req.params.id, type: 'news'});
-
-
     
     try {
 
         newsEntryDto.validate();
         const entry = await entryService.updateEntry(newsEntryDto)
-
         res.json({entry:entry});
 
     } catch (err) {
         res.status(400)
-        console.log(err)
-        res.json({err:err});
+        res.json({error:err.message});
     }
 }
 
