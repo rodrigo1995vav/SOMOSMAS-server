@@ -1,5 +1,7 @@
 const authService = require('../services/auth-service')
-const { body, validationResult } = require('express-validator');
+const { validationResult } = require('express-validator');
+const bcrypt = require('bcrypt');
+const { processRegister } = require('../repositories/auth-repository');
 
 const login = async (req, res, next) => {
     try {
@@ -8,10 +10,29 @@ const login = async (req, res, next) => {
             logged
         })
     } catch (err) {
-        res.json({err})
+        res.json({ err })
     }
 }
 
-module.exports={
-    login
+const register = async (req, res, next) => {
+    try {
+        const { body } = req;
+        const errorsRegister = validationResult(req);
+        if (!errorsRegister.isEmpty()) {
+            //406 no Acceptable
+            res.status(406).json({ ...errorsRegister }) //devuelvo los errores al front por si los necesita
+        }
+        const password = bcrypt.hashSync(body.password, 10);
+
+        const user = await processRegister({ ...body, password })
+        res.status(200).json(user)
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+}
+
+module.exports = {
+    login,
+    register
 }
