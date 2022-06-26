@@ -12,20 +12,17 @@ module.exports = [
     body('email').notEmpty().withMessage('Debe completar el compo email')
         .isEmail().withMessage('Debe ingresar un mail valido')
         .custom(async (value, { req }) => {
-            try {
-                const userFind = await User.findOne({
-                    where: {
-                        email: req.body.email
-                    }
-                })
-                if (userFind) {
-                    throw new Error("Este mail ya esta registrado");
-                } else {
-                    return true;
+            const userFind = await User.findOne({
+                where: {
+                    email: req.body.email
                 }
-            } catch (err) {
-                console.log(err)
+            })
+            //   console.log(userFind, 'userFind')
+            if (userFind) {
+                //401 Unauthorized
+                throw new Error('Email no valido') //para no dar mas información
             }
+            return true
         }),
     body('password').notEmpty().withMessage('Debe completar el campo contraseña')
         .isLength({ min: 8 }).withMessage("Su contraseña debe tener al menos 8 caracteres")

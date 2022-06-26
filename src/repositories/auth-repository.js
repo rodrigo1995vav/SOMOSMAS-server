@@ -1,3 +1,4 @@
+
 const { User, sequelize } = require('../models')
 
 
@@ -20,6 +21,9 @@ const processRegister = async ({ firstName, lastName, email, password, image = n
             image,
             roleId: rollStandard
         })
+        //La entidad de secuela tiene un .get()método para devolver la versión del objeto sin formato (simple).
+        //para findAll si se usa raw:true ,en este caso no 
+        delete userRegister.get({ plain: true }).password // elimino datos sensibles     
         return userRegister
     } catch (err) {
         console.log(err)
