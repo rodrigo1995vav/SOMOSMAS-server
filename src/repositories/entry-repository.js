@@ -16,8 +16,16 @@ const saveEntry = async (newEntry) => {
 
       return entry
 }
+const findAllNews = async() => {
+    const entries = await Entry.findAll({ where:{ type:"news" } });
+    return entries;
+  }
+  
 
 module.exports = {
     getEntryById,
     saveEntry,
+    findAllNews,
 }
+
+

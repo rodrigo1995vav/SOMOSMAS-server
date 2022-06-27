@@ -14,6 +14,26 @@ const updateEntry = async (newContent) =>{
     }
 }
 
-module.exports={
-    updateEntry
+
+const getModifiedNewsEntries = async() => {
+  const entries = await entryRepository.findAllNews();
+
+  const modifiedEntries = entries.map( ({ name, image, createdAt }) => (
+      {
+        name,
+        image, 
+        createdAt
+      }
+    ) 
+  )
+
+  return modifiedEntries;
 }
+
+
+module.exports={
+    updateEntry,
+    getModifiedNewsEntries,
+}
+
+
