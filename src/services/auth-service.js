@@ -19,7 +19,7 @@ const generateAccessToken = async (user)=>{
 
     const userData = {...user}
     delete userData.password
-    const accessToken = jwt.sign(userData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: process.env.TOKEN_EXPIRATION_TIME }) 
+    const accessToken = jwt.sign(userData, process.env.SECRET_JWT_SEED, { expiresIn: Number(process.env.TOKEN_EXPIRATION_TIME) }) 
     return accessToken  
 
 }
@@ -29,17 +29,19 @@ const generateAccessToken = async (user)=>{
 const  authenticateToken = async (req,res,next)=>{
  
     const authHeader = req.headers['authorization']
+    
     const token = authHeader && authHeader.split(' ')[1]
-
-    if(token) {
+  
+    if(!token) {
         throw new Error('Token inválido')
     }
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET,  (err,decodedUser)=>{
 
         if(err){
-            throw new Error(`Token expirado`)
+            throw new Error('Token expirado')
         }
         req.currentUser = decodedUser
+       
         next()
     })
   }
@@ -48,5 +50,5 @@ const  authenticateToken = async (req,res,next)=>{
 
 module.exports = {
     authenticateToken,
-    login
+    login,
 }

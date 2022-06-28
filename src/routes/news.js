@@ -1,14 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const entriesController = require('../controllers/entries-controller');
+const entryController = require('../controllers/entry-controller');
 
 
 
 
 
 
-router.get("/", entriesController.getNewsEntries);
+router.get("/", entryController.getNewsEntries);
 
-router.put("/:id", entriesController.updateEntry)
 
 module.exports = router;

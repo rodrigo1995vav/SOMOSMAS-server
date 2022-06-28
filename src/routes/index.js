@@ -7,7 +7,7 @@ const newsRoutes = require('./news');
 
 router.use("/users", usersRoutes)
 
-router.use("/auth", authRoutes );
+router.use("/auth", authRoutes);
 
 router.use("/organizations", organizationsRoutes)
 
