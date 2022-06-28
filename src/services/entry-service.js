@@ -1,7 +1,7 @@
-const entryRepository = require('../repositories/entry-repository');
+const {findAllNews, findById} = require('../repositories/entry-repository');
 
 const getModifiedNewsEntries = async() => {
-  const entries = await entryRepository.findAllNews();
+  const entries = await findAllNews();
 
   const modifiedEntries = entries.map( ({ name, image, createdAt }) => (
       {
@@ -15,6 +15,13 @@ const getModifiedNewsEntries = async() => {
   return modifiedEntries;
 }
 
+const getNewsById=async(id)=>{
+  const entrie=await findById(id)
+  console.log('entrie', entrie)
+  return entrie
+}
+
 module.exports ={
-  getModifiedNewsEntries
+  getModifiedNewsEntries,
+  getNewsById
 }
