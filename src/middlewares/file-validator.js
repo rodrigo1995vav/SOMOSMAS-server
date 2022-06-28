@@ -17,7 +17,7 @@ const validateFile = (req, res, next) => {
     // it extracts the filetype of the request.files.file object
     const { mimetype } = req.files.file;
     const fileType = mimetype.split('/')[0];
-    if(fileType !== 'imagre'){
+    if(fileType !== 'image'){
       return res.status(400).json({
         ok: false,
         err: 'Incorrect file format.'
