@@ -9,4 +9,7 @@ router.use("/auth", usersRoutes);
 router.use("/organizations", organizationsRoutes)
 
 router.use("/", entriesRoutes);
+
+
+
 module.exports = router;

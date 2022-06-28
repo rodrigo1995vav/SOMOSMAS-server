@@ -1,5 +1,8 @@
 const authService = require('../services/auth-service')
 const { body, validationResult } = require('express-validator');
+const jwt = require('jsonwebtoken');
+
+
 
 const login = async (req, res, next) => {
     try {
@@ -12,6 +15,24 @@ const login = async (req, res, next) => {
     }
 }
 
+const getProfile = async (req, res) => {
+  const authHeader = req.headers['authorization']
+  const token = authHeader && authHeader.split(' ')[1]
+  
+  const decoded = jwt.decode(token)
+   const id = decoded.id
+   try {   
+      const results = await authService.getMyProfile(id);
+      res.status(200).json(results);
+    } catch (err) {
+            return res.status(400).json(err);
+          }
+}
+
+
+
 module.exports={
-    login
+    login,
+    getProfile
+    
 }

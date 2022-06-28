@@ -1,4 +1,5 @@
-const { User, sequelize } = require('../models')
+const { User } = require('../models')
+
 
 
 const getByEmail = async (email) =>{
@@ -9,8 +10,17 @@ const getByEmail = async (email) =>{
         throw "User not found"
 }
 
+const getById = async (id) => {
+    const user = await User.findOne({where:{id: id}})
+    if (user){
+        return user
+    }
+        throw new err("User not found")
+}
 
+  
 
 module.exports = {
-    getByEmail
+    getByEmail, 
+    getById
 }

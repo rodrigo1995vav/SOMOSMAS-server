@@ -1,7 +1,4 @@
 const bcrypt = require('bcrypt');
-const express = require('express');
-const { User, sequelize } = require('../models')
-const jwt = require('jsonwebtoken')
 const authRepository = require('../repositories/auth-repository')
 
 const login = async (body) => {
@@ -14,8 +11,12 @@ const login = async (body) => {
 
 }
 
-
+const getMyProfile = async (id) => {
+    const user = await authRepository.getById(id)
+    return user
+}
 
 module.exports = {
-    login
+    login,
+    getMyProfile
 }
