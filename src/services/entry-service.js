@@ -15,6 +15,12 @@ const getModifiedNewsEntries = async() => {
   return modifiedEntries;
 }
 
+const createEntry = async( entry ) =>{
+  const entryStored = await entryRepository.createEntry( entry );
+  return entryStored;
+}
+
 module.exports ={
-  getModifiedNewsEntries
+  getModifiedNewsEntries,
+  createEntry
 }
