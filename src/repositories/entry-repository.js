@@ -5,6 +5,12 @@ const findAllNews = async() => {
   return entries;
 }
 
+const createEntry = async( entry ) => {
+  const entryStored = await Entry.create( entry );
+  return entryStored
+}
+
 module.exports = {
-  findAllNews
+  findAllNews,
+  createEntry
 }
