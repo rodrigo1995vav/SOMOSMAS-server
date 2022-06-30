@@ -7,14 +7,18 @@ const getEntryById = async (id) =>{
 
 
 const updateEntry = async (newContent) =>{
-  const updatedEntries = await Entry.update( newContent ,{ where: { id:newContent.id,
-                                                                type:newContent.type }})
-    if(updatedEntries.length === 0){
-      return null
-    }
-    else{
-        return updatedEntries
-    }
+
+  const updatedEntry = await Entry.findOne({ where: { id:newContent.id,
+                                                    type:newContent.type }})
+  if(updatedEntry){
+    updatedEntry.set(newContent)
+    await updatedEntry.save()
+    return updatedEntry
+  }
+  else{
+    return null
+  }
+
 }
 const findAllNews = async() => {
     const entries = await Entry.findAll({ where:{ type:"news" } });
