@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const { User } = require('../models')
 
 
@@ -24,3 +25,5 @@ module.exports = {
     getByEmail, 
     getById
 }
+=======
+>>>>>>> main
