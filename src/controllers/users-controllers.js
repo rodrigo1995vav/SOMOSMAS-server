@@ -1,18 +1,9 @@
-const authService = require('../services/auth-service')
+
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const { processRegister } = require('../repositories/auth-repository');
 
-const login = async (req, res, next) => {
-    try {
-        const logged = await authService.login(req.body)
-        res.json({
-            logged
-        })
-    } catch (err) {
-        res.json({ err })
-    }
-}
+
 
 const register = async (req, res, next) => {
     try {
@@ -36,6 +27,5 @@ const register = async (req, res, next) => {
 }
 
 module.exports = {
-    login,
     register
 }
