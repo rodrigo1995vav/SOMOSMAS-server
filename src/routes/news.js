@@ -10,6 +10,7 @@ const { check } = require('express-validator');
 
 router.get("/", entryController.getNewsEntries);
 
+router.put("/:id" ,entryController.updateNewsEntry);
 
 router.post("/", [
     check('name', 'name field is required').not().isEmpty(),
