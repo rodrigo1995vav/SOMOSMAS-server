@@ -15,7 +15,6 @@ const getUserByEmail = async (email) => {
 
 const userRegister = async (newUser) => {
 
-    
     const user = await userRepository.getUserByEmail(newUser.email)
 
     if(user){
