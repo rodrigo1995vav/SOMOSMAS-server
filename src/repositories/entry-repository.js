@@ -5,16 +5,18 @@ const getEntryById = async (id) =>{
     return entry
 }
 
-const saveEntry = async (newEntry) => {
 
-// if the entry Id is not null, it will update the register, if is null, it will create a new register
 
-    const entry = Entry.build(newEntry, {
-        isNewRecord: !newEntry.id,
-      });
-      await entry.save();
 
-      return entry
+const updateEntry = async (newContent) =>{
+  const updatedEntries = await Entry.update( newContent ,{ where: { id:newContent.id,
+                                                                type:newContent.type }})
+    if(updatedEntries.length === 0){
+      return null
+    }
+    else{
+        return updatedEntries
+    }
 }
 const findAllNews = async() => {
     const entries = await Entry.findAll({ where:{ type:"news" } });
@@ -28,6 +30,7 @@ const findAllNews = async() => {
 
 
 module.exports = {
+    updateEntry,
     getEntryById,
     saveEntry,
     findAllNews,
