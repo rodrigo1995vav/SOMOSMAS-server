@@ -6,8 +6,6 @@ const getEntryById = async (id) =>{
 }
 
 
-
-
 const updateEntry = async (newContent) =>{
   const updatedEntries = await Entry.update( newContent ,{ where: { id:newContent.id,
                                                                 type:newContent.type }})
@@ -32,7 +30,6 @@ const findAllNews = async() => {
 module.exports = {
     updateEntry,
     getEntryById,
-    saveEntry,
     findAllNews,
     createEntry,
 }
