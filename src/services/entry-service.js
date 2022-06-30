@@ -21,7 +21,13 @@ const getNewsById=async(id)=>{
   return entrie
 }
 
+const createEntry = async( entry ) =>{
+  const entryStored = await entryRepository.createEntry( entry );
+  return entryStored;
+}
+
 module.exports ={
   getModifiedNewsEntries,
-  getNewsById
+  getNewsById,
+  createEntry
 }
