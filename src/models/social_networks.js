@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     social_networks.init({
         network: DataTypes.STRING,
         link: DataTypes.STRING,
+        organization_id: DataTypes.INTEGER
     }, {
         sequelize,
         modelName: 'social_networks',

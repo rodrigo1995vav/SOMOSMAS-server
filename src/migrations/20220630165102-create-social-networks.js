@@ -14,7 +14,13 @@ module.exports = {
             link: {
                 type: Sequelize.STRING
             },
-
+            organization_id: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: 'organizations',
+                    key: 'id'
+                }
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE
