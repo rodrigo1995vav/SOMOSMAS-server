@@ -1,12 +1,8 @@
 const bcrypt = require('bcrypt');
-<<<<<<< HEAD
-const authRepository = require('../repositories/auth-repository')
-=======
 const jwt = require('jsonwebtoken')
 const userService = require('../services/user-service')
 
 
->>>>>>> main
 
 const login = async (body) => {
     const user = await userService.getUserByEmail(body.email)
@@ -58,11 +54,6 @@ const  authenticateToken = async (req,res,next)=>{
 
 
 module.exports = {
-<<<<<<< HEAD
-    login,
-    getMyProfile
-=======
     authenticateToken,
     login,
->>>>>>> main
 }
