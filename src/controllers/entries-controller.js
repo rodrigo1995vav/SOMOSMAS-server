@@ -1,6 +1,6 @@
 
 const entryService = require('../services/entry-service')
-
+const { uploadFile } = require('../services/s3-service');
 class EntryDto {
 
     //id property can be null because received data can be a new record
@@ -52,6 +52,8 @@ const updateNewsEntry = async (req,res,next)=>{
 
 
 
+
+
 const getNewsEntries = async(req, res) => {
   try {
       const entries = await entryService.getModifiedNewsEntries();
@@ -64,9 +66,29 @@ const getNewsEntries = async(req, res) => {
 }
 
 
-module.exports={
-    updateNewsEntry,
-    getNewsEntries
+const createNewEntry = async(req, res) => {
+
+  const { image, ...rest } = req.body;
+
+  // Uploads image to AWS S3 service and extract de key value
+  const { key } = await uploadFile( req.files.file );
+
+  // const key = 'dfe64q3jhasd3jjafrdkj';
+
+  const entrySaved = await entryService.createEntry({
+    ...rest,
+    image: key,
+    type: 'news'
+  })
+
+  res.status(201).json({
+    ok: true,
+    entry: entrySaved
+  })
 }
 
-
+module.exports = {
+  getNewsEntries,
+  updateNewsEntry,
+  createNewEntry
+}

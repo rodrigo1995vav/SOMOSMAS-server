@@ -1,6 +1,8 @@
 
 const entryRepository = require('../repositories/entry-repository')
 
+
+
 const updateEntry = async (newContent) =>{
    
    const entry = await entryRepository.getEntryById(newContent.id)
@@ -31,9 +33,13 @@ const getModifiedNewsEntries = async() => {
 }
 
 
-module.exports={
-    updateEntry,
-    getModifiedNewsEntries,
+const createEntry = async( entry ) =>{
+  const entryStored = await entryRepository.createEntry( entry );
+  return entryStored;
 }
 
-
+module.exports ={
+  getModifiedNewsEntries,
+  createEntry,
+  updateEntry,
+}
