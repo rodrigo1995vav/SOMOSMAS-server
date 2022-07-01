@@ -1,4 +1,19 @@
-const entryRepository = require('../repositories/entry-repository');
+
+const entryRepository = require('../repositories/entry-repository')
+
+
+
+const updateEntry = async (newContent) =>{
+   
+   const entry = await entryRepository.updateEntry(newContent.id)
+    
+    if( entry ){
+        throw new Error (`La entrada que desea modificar no existe !!!`);
+    }
+        return entry
+    
+}
+
 
 const getModifiedNewsEntries = async() => {
   const entries = await entryRepository.findAllNews();
@@ -15,6 +30,7 @@ const getModifiedNewsEntries = async() => {
   return modifiedEntries;
 }
 
+
 const createEntry = async( entry ) =>{
   const entryStored = await entryRepository.createEntry( entry );
   return entryStored;
@@ -22,5 +38,6 @@ const createEntry = async( entry ) =>{
 
 module.exports ={
   getModifiedNewsEntries,
-  createEntry
+  createEntry,
+  updateEntry,
 }
