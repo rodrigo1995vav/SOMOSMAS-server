@@ -11,7 +11,7 @@ const getNewsEntries = async(req, res) => {
   
 }
 
-const getById= async (req, res)=>{
+const getNewEntrieById= async (req, res)=>{
   const {id}=req.params
   console.log('este es lo que muestra id',id)
   try{
@@ -29,5 +29,5 @@ const getById= async (req, res)=>{
 
 module.exports = {
   getNewsEntries,
-  getById
+  getNewEntrieById
 }

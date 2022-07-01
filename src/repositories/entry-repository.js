@@ -6,9 +6,10 @@ const findAllNews = async() => {
 }
 
 const findById=async (id)=>{
-  console.log('mostrando id', id)
-  const entrie =await Entry.findAll({where:{ type:"news" }})
-  console.log('entrie', entrie)
+  const entrie =await Entry.findOne({where:{ id:id }})
+  if (!entrie){
+    return "Entry does not exist"
+  }
   return entrie
 }
 

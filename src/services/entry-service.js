@@ -16,9 +16,7 @@ const getModifiedNewsEntries = async() => {
 }
 
 const getNewsById=async(id)=>{
-  const entrie=await findById(id)
-  console.log('entrie', entrie)
-  return entrie
+  return await findById(id)
 }
 
 const createEntry = async( entry ) =>{
