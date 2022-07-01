@@ -1,13 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const userController = require('../controllers/users-controllers');
-const ValidationOfTheRegistrationForm = require("../middlewares/validations/ValidationOfTheRegistrationForm");
+const userController = require('../controllers/users-controller')
+
+router.get("/", userController.getUsers);
+
+module.exports = router
 
 
 
-router.post("/login", userController.login)
-router.post("/register", ValidationOfTheRegistrationForm, userController.register)
-
-
-
-module.exports = router;
