@@ -15,7 +15,10 @@ const login = async (body) => {
 
 }
 
-
+const getMyProfile = async (id) => {
+    const user = await authRepository.getById(id)
+    return user
+}
 
 const generateAccessToken = async (user)=>{
 

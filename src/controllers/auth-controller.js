@@ -35,7 +35,22 @@ const register = async (req, res, next) => {
     }
 }
 
+const getProfile = async (req, res) => {
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+    
+    const decoded = jwt.decode(token)
+     const id = decoded.id
+     try {   
+        const results = await authService.getMyProfile(id);
+        res.status(200).json(results);
+      } catch (err) {
+              return res.status(400).json(err);
+            }
+  }
+
 module.exports = {
+    register,
     login,
-    register
+    getProfile
 }
