@@ -11,12 +11,6 @@ router.use("/auth", authRoutes);
 
 router.use("/organizations", organizationsRoutes)
 
-<<<<<<< HEAD
-router.use("/", entriesRoutes);
-
-
-=======
 router.use("/news", newsRoutes);
->>>>>>> main
 
 module.exports = router;
