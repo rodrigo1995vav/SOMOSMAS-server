@@ -5,7 +5,7 @@ const entryRepository = require('../repositories/entry-repository')
 
 const updateEntry = async (newContent) =>{
    
-   const entry = await entryRepository.updateEntry(newContent.id)
+   const entry = await entryRepository.updateEntry(newContent)
     
     if( entry ){
         throw new Error (`La entrada que desea modificar no existe !!!`);

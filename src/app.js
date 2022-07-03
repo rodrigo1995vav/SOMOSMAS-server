@@ -6,13 +6,13 @@ const logger = require("morgan");
 const cors = require("cors");
 const fileUpload = require('express-fileupload');
 require("dotenv").config();
-
+require("./db.js")
 const indexRouter = require("./routes/index");
 
 const app = express();
 app.use(cors());
 
-// view engine setup
+//view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 

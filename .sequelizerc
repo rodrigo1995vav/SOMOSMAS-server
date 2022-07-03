@@ -8,4 +8,4 @@ module.exports = {
     "seeders-path": path.resolve("./src/seeders"),
     "migrations-path": path.resolve("./src/migrations"),
 };
-//si no les andan los comandos npx de sequelize prueben  con descometar models-path,  seeders-path,  migrations-path 
+//si no les andan los comandos npx de sequelize prueben  con descometar models-path,  seeders-path,  migrations-path
