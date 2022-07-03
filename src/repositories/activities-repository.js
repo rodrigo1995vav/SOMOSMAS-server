@@ -4,6 +4,7 @@ const listActivities = async (page) => {
     const limit = 10;
     const offset = page * limit;
     const { count, rows } = await Activity.findAndCountAll({
+        attributes:['name'],
         offset: offset,
         limit: limit,
     })
