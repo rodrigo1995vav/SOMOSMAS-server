@@ -1,10 +1,9 @@
 const authService = require('../services/auth-service')
+const { processRegister } = require('../repositories/auth-repository');
 const userService = require('../services/user-service')
-const { validationResult } = require('express-validator');
-
+const { validationResult } = require('express-validator')
 
 const login = async (req, res, next) => {
-
     try {
         const token = await authService.login(req.body)
         res.json({
@@ -12,12 +11,9 @@ const login = async (req, res, next) => {
         })
     } catch (err) {
         res.status(400)
-        res.json({error: err.message})
+        res.json({ error: err.message })
     }
 }
-
-
-
 
 const register = async (req, res, next) => {
     try {
@@ -27,8 +23,8 @@ const register = async (req, res, next) => {
             //406 no Acceptable
             res.status(406).json(errorsRegister.mapped()) //devuelvo los errores al front por si los necesita
         } else {
-            
-            const user = await userService.userRegister({...body})
+
+            const user = await userService.userRegister({ ...body })
             res.status(200).json(user)
         }
 
