@@ -9,4 +9,6 @@ router.post("/login", authController.login)
 
 router.post("/register", ValidationOfTheRegistrationForm, authController.register)
 
+
+
 module.exports = router
