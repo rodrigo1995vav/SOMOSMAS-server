@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Organization.hasMany(models.Social_network, {foreignKey: 'organization_id'});
     }
   };
   Organization.init({
