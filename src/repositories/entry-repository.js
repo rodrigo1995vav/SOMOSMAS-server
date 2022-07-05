@@ -1,10 +1,27 @@
+
 const { Entry } = require('../models')
 
 const getEntryById = async (id) =>{
-    const entry = await Entries.findOne({where:{id: id}})
+    const entry = await Entry.findOne({where:{id: id}})
     return entry
 }
 
+const deleteEntry= async(id) =>{
+  const entry = await Entry.findOne({where:{id: id}})
+  if (entry) {
+    const resp=await Entry.destroy({where:{id: id}})
+    return {
+      status: true,
+      message: 'deleted successfully',
+      payload: resp
+    }
+  } else{
+    return {
+      status: false,
+      message: 'Entry not found',
+    }
+  }
+}
 
 const updateEntry = async (newContent) =>{
 
@@ -36,6 +53,7 @@ module.exports = {
     getEntryById,
     findAllNews,
     createEntry,
+    deleteEntry
 }
 
 

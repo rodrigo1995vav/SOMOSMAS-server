@@ -21,4 +21,6 @@ router.post("/", [
   ],
   entryController.createNewEntry);
 
+router.delete('/:id', entryController.deleteEntriesById)
+
 module.exports = router;

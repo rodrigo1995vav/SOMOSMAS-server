@@ -30,6 +30,9 @@ const getModifiedNewsEntries = async() => {
   return modifiedEntries;
 }
 
+const deleteEntryById = async (id) => {
+ return await entryRepository.deleteEntry(id)
+}
 
 const createEntry = async( entry ) =>{
   const entryStored = await entryRepository.createEntry( entry );
@@ -40,4 +43,5 @@ module.exports ={
   getModifiedNewsEntries,
   createEntry,
   updateEntry,
+  deleteEntryById
 }
