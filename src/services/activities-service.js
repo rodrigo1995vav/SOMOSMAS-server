@@ -5,6 +5,11 @@ const getAllActivities = async (page) => {
     return activities
 }
 
+const updateActivities = async (id,data) => {
+   return await activitiesRepository.updateActivities(id,data)
+}
+
 module.exports = {
-    getAllActivities
+    getAllActivities,
+    updateActivities
 }

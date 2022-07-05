@@ -12,8 +12,27 @@ const listActivities = async (page) => {
     return { total_activities: count, activities: rows }
 }
 
+const updateActivities = async(id,data) => {
+    const {name, image, content} = data
+    const exist=await Activity.findOne({where:{id: id}})
+    if (exist) {
+        const update=await Activity.update({name: name, image: image, content: content},{where:{id: id}})
+        console.log('update', update)
+        return {
+            status:true,
+            message:'updated Successfully',
+            payload:update
+        }
+    } else {
+        return {
+            status:false,
+            message:'activity not found'
+        }
+    }
 
+}
 
 module.exports = {
-    listActivities
+    listActivities,
+    updateActivities
 }
