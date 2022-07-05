@@ -49,11 +49,6 @@ const updateNewsEntry = async (req,res,next)=>{
     }
 }
 
-
-
-
-
-
 const getNewsEntries = async(req, res) => {
   try {
       const entries = await entryService.getModifiedNewsEntries();
@@ -65,6 +60,20 @@ const getNewsEntries = async(req, res) => {
   
 }
 
+const getNewsEntryById= async (req, res)=>{
+  const {id}=req.params
+  try{
+    const entries= await entryService.getNewsById(id)
+    res.status(200).json({
+      status:true,
+      message:"Request result",
+      payload:entries
+    })
+  } catch (err) {
+    console.log('err',err)
+    res.status(500).json({err})
+  }
+}
 
 const createNewEntry = async(req, res) => {
 
@@ -89,6 +98,7 @@ const createNewEntry = async(req, res) => {
 
 module.exports = {
   getNewsEntries,
+  getNewsEntryById,
   updateNewsEntry,
   createNewEntry
 }
