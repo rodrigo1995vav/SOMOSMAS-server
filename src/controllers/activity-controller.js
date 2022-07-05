@@ -14,6 +14,19 @@ const getAllActivity = async (req, res, next) => {
 
 }
 
+const createNewActivity = async (req, res, next) => {
+    try {
+        const query = req.body
+        const activity = await activitiesService.createActivity(query)
+        res.status(200).json(activity)
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+
+}
+
 module.exports = {
-    getAllActivity
+    getAllActivity, createNewActivity
 }
