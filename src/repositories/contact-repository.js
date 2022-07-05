@@ -5,12 +5,7 @@ const createContact = async (contact) => {
     return storedContact
 }
 
-const findByEmail = async (contact) => {
-    const searchedContact = await Contact.findOne({ where: { email: contact.email } })
-    return searchedContact
-}
 
 module.exports = {
-    createContact,
-    findByEmail
+    createContact
 }
