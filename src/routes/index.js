@@ -4,6 +4,7 @@ const usersRoutes = require("./users");
 const authRoutes = require("./auth")
 const organizationsRoutes = require('./organization')
 const newsRoutes = require('./news');
+const contactRoutes = require('./contact');
 const activitiesRoutes = require('./activities');
 
 
@@ -15,6 +16,7 @@ router.use("/organizations", organizationsRoutes)
 
 router.use("/news", newsRoutes);
 
+router.use("/contacts", contactRoutes)
 router.use("/activity", activitiesRoutes);
 
 
