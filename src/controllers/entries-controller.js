@@ -1,8 +1,8 @@
-const {getModifiedNewsEntries, getNewsById} = require('../services/entry-service');
+const entryService = require('../services/entry-service');
 
 const getNewsEntries = async(req, res) => {
   try {
-      const entries = await getModifiedNewsEntries();
+      const entries = await entryService.getModifiedNewsEntries();
       res.status(200).json({ entries });
   } catch (err) {
       console.log(err);
@@ -11,11 +11,10 @@ const getNewsEntries = async(req, res) => {
   
 }
 
-const getNewEntrieById= async (req, res)=>{
+const getNewsEntryById= async (req, res)=>{
   const {id}=req.params
-  console.log('este es lo que muestra id',id)
   try{
-    const entries= await getNewsById(id)
+    const entries= await entryService.getNewsById(id)
     res.status(200).json({
       status:true,
       message:"Request result",
@@ -29,5 +28,5 @@ const getNewEntrieById= async (req, res)=>{
 
 module.exports = {
   getNewsEntries,
-  getNewEntrieById
+  getNewsEntryById
 }

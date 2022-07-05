@@ -1,4 +1,19 @@
-const {findAllNews, findById} = require('../repositories/entry-repository');
+
+const entryRepository = require('../repositories/entry-repository')
+
+
+
+const updateEntry = async (newContent) =>{
+   
+   const entry = await entryRepository.updateEntry(newContent)
+    
+    if( entry ){
+        throw new Error (`La entrada que desea modificar no existe !!!`);
+    }
+        return entry
+    
+}
+
 
 const getModifiedNewsEntries = async() => {
   const entries = await findAllNews();
@@ -27,5 +42,6 @@ const createEntry = async( entry ) =>{
 module.exports ={
   getModifiedNewsEntries,
   getNewsById,
-  createEntry
+  createEntry,
+  updateEntry,
 }
