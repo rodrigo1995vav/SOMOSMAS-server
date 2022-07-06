@@ -1,7 +1,7 @@
 const testimonialRepository = require('../repositories/testimonial-repository')
 
 
-const getAllTestimonials = async (page) => {
+const getAllTestimonials = async (limit,page) => {
 
     const testimonialsForPage = await testimonialRepository.getAllUsers(limit,page)
 

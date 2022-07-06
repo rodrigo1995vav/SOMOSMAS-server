@@ -1,6 +1,6 @@
 const { Testimonial } = require('../models')
 
-const getAllTestimonials = async (page, limit) => {
+const getAllTestimonials = async (limit , page) => {
 
     const limit = limit;
 
