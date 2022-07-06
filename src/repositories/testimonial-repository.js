@@ -2,7 +2,6 @@ const { Testimonial } = require('../models')
 
 const getAllTestimonials = async (limit , page) => {
 
-    const limit = limit;
 
     const offset = page * limit;
 
