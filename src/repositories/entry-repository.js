@@ -1,4 +1,3 @@
-
 const { Entry } = require('../models')
 
 const getEntryById = async (id) =>{
@@ -23,6 +22,19 @@ const deleteEntry= async(id) =>{
   }
 }
 
+const findById=async (id)=>{
+  const entry =await Entry.findOne({where:{ id:id }})
+  if (!entry){
+    return "Entry does not exist"
+  }
+  return entry
+}
+
+const createEntry = async( entry ) => {
+  const entryStored = await Entry.create( entry );
+  return entryStored
+}
+
 const updateEntry = async (newContent) =>{
 
   const updatedEntry = await Entry.findOne({ where: { id:newContent.id,
@@ -35,27 +47,18 @@ const updateEntry = async (newContent) =>{
   else{
     return null
   }
-
 }
+
 const findAllNews = async() => {
     const entries = await Entry.findAll({ where:{ type:"news" } });
     return entries;
   }
 
-  const createEntry = async( entry ) => {
-    const entryStored = await Entry.create( entry );
-    return entryStored
-  }
-
-
 module.exports = {
-    updateEntry,
-    getEntryById,
-    findAllNews,
-    createEntry,
-    deleteEntry
+  updateEntry,
+  getEntryById,
+  findAllNews,
+  createEntry,
+  deleteEntry,
+  findById
 }
-
-
-
-

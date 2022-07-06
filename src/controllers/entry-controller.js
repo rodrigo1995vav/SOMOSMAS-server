@@ -1,10 +1,9 @@
 
 const entryService = require('../services/entry-service')
 const { uploadFile } = require('../services/s3-service');
+
 class EntryDto {
-
     //id property can be null because received data can be a new record
-
     constructor ({id,title, image, content, category, type}){
         this.id = id,
         this.name = title,
@@ -38,11 +37,9 @@ const updateNewsEntry = async (req,res,next)=>{
     const newsEntryDto = new EntryDto ({...req.body, id: req.params.id, type: 'news'});
     
     try {
-
         newsEntryDto.validate();
         const entry = await entryService.updateEntry(newsEntryDto)
         res.json({entry:entry});
-
     } catch (err) {
         res.status(400)
         res.json({error:err.message});
@@ -57,7 +54,6 @@ const getNewsEntries = async(req, res) => {
       console.log(err);
       res.status(500).json({err})
   }
-  
 }
 
 const deleteEntriesById=async (req, res) => {
@@ -66,6 +62,20 @@ const deleteEntriesById=async (req, res) => {
     res.status(200).json({ entries });
   } catch (err) {
     console.log(err);
+  }
+}
+
+const getNewsEntryById= async (req, res)=>{
+  const {id}=req.params
+  try{
+    const entries= await entryService.getNewsById(id)
+    res.status(200).json({
+      status:true,
+      message:"Request result",
+      payload:entries
+    })
+  } catch (err) {
+    console.log('err',err)
     res.status(500).json({err})
   }
 }
@@ -93,6 +103,7 @@ const createNewEntry = async(req, res) => {
 
 module.exports = {
   getNewsEntries,
+  getNewsEntryById,
   updateNewsEntry,
   createNewEntry,
   deleteEntriesById
