@@ -32,9 +32,18 @@ const getAllUsers = async(page)=>{
     return { total_users: count, users: rows }
 }
 
+const deleteUser = async (id) =>{
+    const user = await User.findOne({where:{id: id}})
+    if (!user){
+        return "User does not exist"
+    }
+    await user.destroy()
+    return "User deleted"
+}
 
 module.exports = {
     getUserByEmail,
     saveUser,
-    getAllUsers
+    getAllUsers,
+    deleteUser
 }

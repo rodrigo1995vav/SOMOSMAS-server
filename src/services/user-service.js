@@ -34,6 +34,15 @@ const getAllUsers = async (page) => {
     return usersForPage
 }
 
+const deleteUser = async (id) => {
+    const user = await userRepository.getUserById(id)
+    if (!user) {
+        throw new Error(`El usuario con id: ${id} no existe`)
+    }
+    await userRepository.deleteUser(id)
+    return "Usuario eliminado"
+}
+
 module.exports = {
     getUserByEmail,
     userRegister,
