@@ -15,6 +15,10 @@ const getAllTestimonials = async (limit , page) => {
 
     return { total_testimonials: count, testimonials: rows }
 }
+
+
+
 module.exports= {
     getAllTestimonials,
+
 }
