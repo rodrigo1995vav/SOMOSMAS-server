@@ -15,7 +15,7 @@ router.use("/auth", authRoutes);
 router.use("/organizations", organizationsRoutes)
 
 router.use("/news", newsRoutes);
-
+router.use("/testimonials")
 router.use("/contacts", contactRoutes)
 router.use("/activity", activitiesRoutes);
 
