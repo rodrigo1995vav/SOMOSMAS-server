@@ -1,11 +1,11 @@
-const { Testimonial } = require('../models')
+const { Testimony } = require('../models')
 
 const getAllTestimonials = async (limit , page) => {
 
 
     const offset = page * limit;
 
-    const { count, rows } = await Testimonial.findAndCountAll({
+    const { count, rows } = await Testimony.findAndCountAll({
         offset: offset,
         limit: limit,
     })
@@ -18,8 +18,8 @@ const getAllTestimonials = async (limit , page) => {
 
 
 const deleteTestimonial = async (id) =>{
-  const testimonialInstance =  await Testimonial.findOne({ where: { id: id } })
-  
+  const testimonialInstance =  await Testimony.findOne({ where: { id: id } })
+
   if ( !testimonialInstance){
     return null
 }

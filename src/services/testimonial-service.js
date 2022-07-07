@@ -14,7 +14,7 @@ const getAllTestimonials = async (limit,page) => {
 
 const deleteTestimonial = async (testimonialId) =>{
 
-    const deletedTestimonial = await testimonialRepository.deleteTestimonials(testimonialId)
+    const deletedTestimonial = await testimonialRepository.deleteTestimonial(testimonialId)
 
     if(!deletedTestimonial){
         throw new Error('El testimonio que desea eliminar no existe')
