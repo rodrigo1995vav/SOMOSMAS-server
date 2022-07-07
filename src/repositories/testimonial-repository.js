@@ -17,8 +17,20 @@ const getAllTestimonials = async (limit , page) => {
 }
 
 
+const deleteTestimonial = async (id) =>{
+  const testimonialInstance =  await Testimonial.findOne({ where: { id: id } })
+  
+  if ( !testimonialInstance){
+    return null
+}
+  await testimonialInstance.destroy()
+  
+  return testimonialInstance
+}
+
 
 module.exports= {
     getAllTestimonials,
+    deleteTestimonial,
 
 }

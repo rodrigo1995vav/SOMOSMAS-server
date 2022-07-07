@@ -18,6 +18,18 @@ const getAllTestimonials = async (req, res, next) => {
 
 }
 
+const deleteTestimonial = async (req, res) =>{
+
+    const testimonialId = Number(req.params.id)
+
+    try {
+        const deletedTestimonial = await testimonialService.deleteTestimonial(testimonialId)
+    } catch (err) {
+        res.status(500).json({err: err.message})
+    }
+}
+
 module.exports = {
-    getAllTestimonials
+    getAllTestimonials,
+    deleteTestimonial,
 }

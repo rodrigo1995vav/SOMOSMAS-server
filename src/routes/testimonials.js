@@ -4,6 +4,6 @@ const testimonialController = require('../controllers/testimonial-controller');
 
 
 router.get("/:limit/:page", testimonialController.getAllTestimonials)
-
+router.delete("/:id", testimonialController.deleteTestimonial)
 
 module.exports = router;
