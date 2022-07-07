@@ -16,7 +16,7 @@ const updateEntry = async (newContent) =>{
 
 
 const getModifiedNewsEntries = async() => {
-  const entries = await entryRepository.findAllNews();
+  const entries = await findAllNews();
 
   const modifiedEntries = entries.map( ({ name, image, createdAt }) => (
       {
@@ -30,6 +30,9 @@ const getModifiedNewsEntries = async() => {
   return modifiedEntries;
 }
 
+const getNewsById=async(id)=>{
+  return await findById(id)
+}
 
 const createEntry = async( entry ) =>{
   const entryStored = await entryRepository.createEntry( entry );
@@ -38,6 +41,7 @@ const createEntry = async( entry ) =>{
 
 module.exports ={
   getModifiedNewsEntries,
+  getNewsById,
   createEntry,
   updateEntry,
 }
