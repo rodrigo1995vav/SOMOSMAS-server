@@ -24,8 +24,13 @@ const deleteTestimonial = async (req, res) =>{
 
     try {
         const deletedTestimonial = await testimonialService.deleteTestimonial(testimonialId)
+
+        res.json({ deletedTestimonial: deletedTestimonial })
+
     } catch (err) {
+
         res.status(500).json({err: err.message})
+        
     }
 }
 
