@@ -14,7 +14,7 @@ class CategoryDto {
             throw new Error('Por favor completar el nombre')
         }
         console.log(typeof(this.name))
-        if(typeof(this.name) === String){
+        if(!(typeof(this.name) === 'string')){
             throw new Error('El nombre debe ser tipo String')
         }
      
@@ -27,7 +27,7 @@ const createCategory = async (req, res) =>{
     const categoryDto = new CategoryDto ({...req.body , id: req.params.id})
 
     try {
-        categoryDto.validateName()
+     categoryDto.validateName()
 
      const newCategory =  await categoryService.createCategory(categoryDto)
 
