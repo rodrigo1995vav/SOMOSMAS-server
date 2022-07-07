@@ -4,8 +4,7 @@
  */
 
 const validateFile = (req, res, next) => {
-
-  if ( !req.files || !req.files.file) {
+  if ( !req.file ) {
 
     return res.status(400).json({
       ok: false,
@@ -15,7 +14,8 @@ const validateFile = (req, res, next) => {
   }else {
 
     // it extracts the filetype of the request.files.file object
-    const { mimetype } = req.files.file;
+    // Multer is already checking the file type, double checking cant hurt I guess 
+    const { mimetype } = req.file;
     const fileType = mimetype.split('/')[0];
     if(fileType !== 'image'){
       return res.status(400).json({

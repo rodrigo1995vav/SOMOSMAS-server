@@ -5,8 +5,8 @@ const getAllActivities = async (page) => {
     return activities
 }
 
-const createActivity = async (activity) => {
-    const activities = await activitiesRepository.postActivity(activity)
+const createActivity = async (activity, imagePath) => {
+    const activities = await activitiesRepository.postActivity(activity,imagePath)
     return activities
 }
 
