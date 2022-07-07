@@ -6,7 +6,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const fileUpload = require('express-fileupload');
 require("dotenv").config();
-require("./db.js")
+
 const indexRouter = require("./routes/index");
 
 const app = express();
