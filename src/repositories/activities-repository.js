@@ -14,22 +14,19 @@ const listActivities = async (page) => {
 
 const updateActivities = async(id,data) => {
     const {name, image, content} = data
-    const exist=await Activity.findOne({where:{id: id}})
-    if (exist) {
-        const update=await Activity.update({name: name, image: image, content: content},{where:{id: id}})
-        console.log('update', update)
-        return {
-            status:true,
-            message:'updated Successfully',
-            payload:update
-        }
-    } else {
+    const update=await Activity.update({name: name, image: image, content: content},{where:{id: id}})
+
+    if (update[0]===0) {
         return {
             status:false,
             message:'activity not found'
         }
+    } else {
+        return {
+            status:true,
+            message:'updated Successfully'
+        }
     }
-
 }
 
 module.exports = {
