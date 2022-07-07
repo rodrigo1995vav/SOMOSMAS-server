@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Organization.hasMany(models.Social_network, {foreignKey: 'organization_id'});
     }
   };
   Organization.init({
@@ -21,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     welcomeText: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'organization',
+    tableName: 'organizations',
   });
   return Organization;
 };
