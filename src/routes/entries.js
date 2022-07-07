@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const entriesController = require('../controllers/entries-controller');
+const {getNewsEntries, getById} = require('../controllers/entries-controller');
 
-router.get("/news", entriesController.getNewsEntries);
+router.get("/news", getNewsEntries);
+
+router.post("/news/:id",getById);
 
 module.exports = router;
