@@ -6,27 +6,24 @@ const logger = require("morgan");
 const cors = require("cors");
 const fileUpload = require('express-fileupload');
 require("dotenv").config();
-//require("./db.js")
+const multer = require("multer");
 const indexRouter = require("./routes/index");
+const { validateExtensionMulter } = require("./middlewares/validateExtensionsMulter");
+const maxSize = 10 * 1024 * 1024; //Setting images to a maxzise of 10MB
 
 const app = express();
 app.use(cors());
-
-//view engine setup
-// app.set("views", path.join(__dirname, "views"));
-// app.set("view engine", "ejs");
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-//app.use(express.static(path.join(__dirname, "public")));
 
-// app.use(fileUpload({
-//   useTempFiles : true,
-//   tempFileDir : 'tmp',
-//   createParentPath: true              // Crea la carpeta destino si no existe
-// }));
+app.use(multer({
+  dest: "uploads/",
+  fileFilter: validateExtensionMulter,
+  limits: { fileSize: maxSize },
+}).single('image'))
 
 app.use("/", indexRouter);
 
