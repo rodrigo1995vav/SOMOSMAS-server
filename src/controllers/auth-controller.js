@@ -12,7 +12,7 @@ const login = async (req, res, next) => {
         })
     } catch (err) {
         res.status(400)
-        res.json({ error: err.message })
+        res.json({ message: err.message })
     }
 }
 

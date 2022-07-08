@@ -7,9 +7,9 @@ const userService = require('../services/user-service')
 const login = async (body) => {
     const user = await userService.getUserByEmail(body.email)
     if (bcrypt.compareSync(body.password, user.password)) {
-        const accessToken = generateAccessToken(user)
-        delete user.password
-        return {accessToken , user }
+        const accessToken = await generateAccessToken(user)
+        delete await user.password
+        return { accessToken , user }
     } else {
         throw new Error ("Contraseña incorrecta") 
     }
