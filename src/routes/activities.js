@@ -10,9 +10,8 @@ const s3Services = require("../services/s3-service");
 
 router.get("/list", activityController.getAllActivity);
 
-// In the event that the request has to come with an image for the post method to keep his way, put the validateFile function as a middleware next to upload.single
 router.post(
-  "/",
+  "/",validateFile,
   validateCreateActivity,
   activityController.createNewActivity
 );

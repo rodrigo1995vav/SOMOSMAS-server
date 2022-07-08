@@ -1,15 +1,11 @@
 const createError = require("http-errors");
 const express = require("express");
-const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
-const fileUpload = require('express-fileupload');
 require("dotenv").config();
 const multer = require("multer");
 const indexRouter = require("./routes/index");
-const { validateExtensionMulter } = require("./middlewares/validateExtensionsMulter");
-const maxSize = 10 * 1024 * 1024; //Setting images to a maxzise of 10MB
 
 const app = express();
 app.use(cors());
@@ -20,9 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use(multer({
-  dest: "uploads/",
-  fileFilter: validateExtensionMulter,
-  limits: { fileSize: maxSize },
+  dest: "uploads/"
 }).single('image'))
 
 app.use("/", indexRouter);
