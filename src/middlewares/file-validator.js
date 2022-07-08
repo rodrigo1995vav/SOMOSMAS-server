@@ -4,10 +4,11 @@ const { deleteTempFile } = require("../services/fileServices");
  * Middleware checks for the presence of file property
  * in request.files object.
  */
-const maxSize = 1 * 1024 * 1024; //10MB
-const validateFile = (req, res, next) => {
-  const { mimetype } = req.file;
-  const fileType = mimetype.split("/")[0];
+const maxSize = 10 * 1024 * 1024; //10MB
+const validateFile = async (req, res, next) => {
+  var errorFileType;
+  var errorFileSize;
+  const error = []
 
   // In the event that the request has to come with an image for the post method to keep his way, uncomment this!
   // if ( !req.file ) {
@@ -17,18 +18,32 @@ const validateFile = (req, res, next) => {
   //   });
   // }
 
+  if (req.file) {
+    const { mimetype } = req.file;
+    const fileType = mimetype.split("/")[0];
+    // it extracts the filetype of the request.files.file object
+    if (fileType !== "image") {
+      errorFileType = {
+        msg: "El archivo debe ser una imagen.",
+        param: "image",
+        location: "file",
+      };
+      error.push(errorFileType) 
+    }
 
-  // it extracts the filetype of the request.files.file object
-  if (fileType !== "image") {
-    deleteTempFile(req.file.path)
-    return res.status(400).json({error:{ message: "El archivo debe ser una imagen." }});
-  }
+    if (req.file.size > maxSize) {
+      errorFileSize = {
+        msg: "El archivo supera los 10mb.",
+        param: "image",
+        location: "file",
+      };
+      error.push(errorFileSize) 
+    }
 
-  if (req.file.size > maxSize) {
-    deleteTempFile(req.file.path)
-    return res
-      .status(400)
-      .json({ error: { message: "El archivo supera los 10mb." } });
+    if (error) {
+      await deleteTempFile(req.file.path);
+      return res.status(400).json({ error: error });
+    }
   }
 
   next();
