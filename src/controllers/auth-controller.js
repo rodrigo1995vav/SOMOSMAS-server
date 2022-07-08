@@ -5,9 +5,10 @@ const { validationResult } = require('express-validator')
 
 const login = async (req, res, next) => {
     try {
-        const token = await authService.login(req.body)
+        const data = await authService.login(req.body)
         res.json({
-            accessToken: token
+            user: data.user,
+            accessToken: data.accessToken
         })
     } catch (err) {
         res.status(400)
