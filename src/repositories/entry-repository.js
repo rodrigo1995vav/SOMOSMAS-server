@@ -5,6 +5,23 @@ const getEntryById = async (id) =>{
     return entry
 }
 
+const deleteEntry= async(id) =>{
+  const entry = await Entry.findOne({where:{id: id}})
+  if (entry) {
+    const resp=await Entry.destroy({where:{id: id}})
+    return {
+      status: true,
+      message: 'deleted successfully',
+      payload: resp
+    }
+  } else{
+    return {
+      status: false,
+      message: 'Entry not found',
+    }
+  }
+}
+
 const findById=async (id)=>{
   const entry =await Entry.findOne({where:{ id:id }})
   if (!entry){
@@ -30,7 +47,6 @@ const updateEntry = async (newContent) =>{
   else{
     return null
   }
-
 }
 
 const findAllNews = async() => {
@@ -38,11 +54,11 @@ const findAllNews = async() => {
     return entries;
   }
 
-
 module.exports = {
-  findById,
   updateEntry,
   getEntryById,
   findAllNews,
   createEntry,
+  deleteEntry,
+  findById
 }
