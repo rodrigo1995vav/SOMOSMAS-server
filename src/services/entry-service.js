@@ -3,7 +3,18 @@
 const { EntryNotFoundError } = require('../errors/entry-errors');
 const entryRepository = require('../repositories/entry-repository')
 
+const deleteEntry = async (id) =>{
 
+  const deletedEntry = await entryRepository.deleteEntry(id)
+
+  if(!deletedEntry)
+  {
+    throw new Error('La entrada no existe !!!')
+  }
+return deletedEntry
+
+
+}
 
 const updateEntry = async (newContent) =>{
    
@@ -51,4 +62,5 @@ module.exports ={
   getNewsById,
   createEntry,
   updateEntry,
+  deleteEntry,
 }
