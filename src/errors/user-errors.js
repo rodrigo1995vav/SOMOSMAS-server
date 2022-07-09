@@ -2,7 +2,7 @@
 class UserNotFoundError extends Error {
 
     constructor( {email = null, id = null} ){
-
+        super()
         this.message = 'No se encontró al usuario'
 
         if (email){
@@ -20,7 +20,7 @@ class UserNotFoundError extends Error {
 
 class UsersTableEmptyError extends Error {
     constructor ( ) {
-
+        super()
         this.message = 'No hay usuarios'
         this.code = 400
     }
@@ -29,7 +29,7 @@ class UsersTableEmptyError extends Error {
 class CredentialsTakenError extends Error {
 
     constructor ( email = null ) {
-
+        super()
         this.message = 'Ya existe un usuario con esas credenciales'
 
         if (email){

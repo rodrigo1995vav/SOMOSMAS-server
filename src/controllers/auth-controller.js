@@ -11,7 +11,8 @@ const login = async (req, res, next) => {
             accessToken: data.accessToken
         })
     } catch (err) {
-        next(err)
+        console.log(err)
+        res.status(400).json(err)
     }
 }
 

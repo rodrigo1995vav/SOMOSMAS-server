@@ -1,5 +1,7 @@
+
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { WrongPasswordError } = require('../errors/auth-errors');
 const userService = require('../services/user-service')
 
 

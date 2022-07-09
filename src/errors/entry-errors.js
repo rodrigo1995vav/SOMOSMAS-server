@@ -5,7 +5,7 @@ class EntryNotFoundError extends Error {
    
 
     constructor( type = null ){
-
+        super()
         this.message = 'La entrada no existe!!!'
         
         if(type === 'news'){

@@ -3,6 +3,7 @@
  class WrongPasswordError extends Error {
 
     constructor(){
+        super()
         this.message = 'Contraseña incorrecta.'
         this.code = 400
     }
@@ -12,6 +13,7 @@
 
 class InvalidTokenError extends Error {
     constructor(){
+        super()
         this.message = 'Token no válido'
         this.code = 401
     }
