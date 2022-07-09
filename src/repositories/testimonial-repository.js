@@ -1,12 +1,12 @@
 const { Testimonial } = require('../models')
-const { Testimony, sequelize } = require('../models')
+
 
 const getAllTestimonials = async (limit , page) => {
 
 
     const offset = page * limit;
 
-    const { count, rows } = await Testimony.findAndCountAll({
+    const { count, rows } = await Testimonial.findAndCountAll({
         offset: offset,
         limit: limit,
     })
@@ -18,13 +18,13 @@ const getAllTestimonials = async (limit , page) => {
 }
 
 const createTestimony = async (testimony) => {
-    const testimonyStored = await Testimony.create(testimony)
+    const testimonyStored = await Testimonial.create(testimony)
     return testimonyStored
 }
 
 
 const deleteTestimonial = async (id) =>{
-  const testimonialInstance =  await Testimony.findOne({ where: { id: id } })
+  const testimonialInstance =  await Testimonial.findOne({ where: { id: id } })
 
   if ( !testimonialInstance){
     return null
