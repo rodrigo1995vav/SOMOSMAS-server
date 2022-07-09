@@ -6,6 +6,7 @@ const organizationsRoutes = require('./organization')
 const newsRoutes = require('./news');
 const contactRoutes = require('./contact');
 const activitiesRoutes = require('./activities');
+
 const testimonialRoutes = require('./testimonials')
 
 router.use("/users", usersRoutes)
@@ -18,6 +19,9 @@ router.use("/news", newsRoutes);
 router.use("/testimonials",testimonialRoutes)
 router.use("/contacts", contactRoutes)
 router.use("/activity", activitiesRoutes);
+
+
+
 
 
 module.exports = router;
