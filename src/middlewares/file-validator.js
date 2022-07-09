@@ -40,7 +40,7 @@ const validateFile = async (req, res, next) => {
       error.push(errorFileSize) 
     }
 
-    if (error) {
+    if (error.length !== 0) {
       await deleteTempFile(req.file.path);
       return res.status(400).json({ error: error });
     }
