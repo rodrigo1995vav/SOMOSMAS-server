@@ -28,7 +28,9 @@ const updateEntry = async (newContent) =>{
 }
 
 const findAllNews = async() => {
+  console.log('adawdawdwad')
     const entries = await Entry.findAll({ where:{ type:"news" } });
+    
     return entries;
   }
 

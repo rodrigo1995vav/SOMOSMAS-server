@@ -51,6 +51,7 @@ const updateNewsEntry = async (req,res,next)=>{
 }
 
 const getNewsEntries = async(req, res, next) => {
+
   try {
       const entries = await entryService.getModifiedNewsEntries();
       res.status(200).json({ entries });

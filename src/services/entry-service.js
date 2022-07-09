@@ -18,7 +18,8 @@ const updateEntry = async (newContent) =>{
 
 
 const getModifiedNewsEntries = async() => {
-  const entries = await findAllNews();
+  
+  const entries = await entryRepository.findAllNews();
 
   const modifiedEntries = entries.map( ({ name, image, createdAt }) => (
       {
