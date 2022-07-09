@@ -1,4 +1,6 @@
 
+
+const { EntryNotFoundError } = require('../errors/entry-errors');
 const entryRepository = require('../repositories/entry-repository')
 
 
@@ -7,8 +9,8 @@ const updateEntry = async (newContent) =>{
    
    const entry = await entryRepository.updateEntry(newContent)
     
-    if( entry ){
-        throw new Error (`La entrada que desea modificar no existe !!!`);
+    if( !entry ){
+        throw new EntryNotFoundError (newContent.type);
     }
         return entry
     
@@ -30,8 +32,12 @@ const getModifiedNewsEntries = async() => {
   return modifiedEntries;
 }
 
-const getNewsById=async(id)=>{
-  return await findById(id)
+const getNewsById = async( id )=>{
+  const entry =  await entryRepository.getEntryById(id)
+    if( !entry ){
+      throw new EntryNotFoundError ('news');
+    }
+  return entry
 }
 
 const createEntry = async( entry ) =>{

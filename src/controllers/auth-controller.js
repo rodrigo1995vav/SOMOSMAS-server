@@ -11,8 +11,7 @@ const login = async (req, res, next) => {
             accessToken: data.accessToken
         })
     } catch (err) {
-        res.status(400)
-        res.json({ message: err.message })
+        next(err)
     }
 }
 
@@ -36,7 +35,7 @@ const register = async (req, res, next) => {
     }
 }
 
-const getProfile = async (req, res) => {
+const getProfile = async (req, res, next) => {
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]
     
@@ -46,7 +45,7 @@ const getProfile = async (req, res) => {
         const results = await authService.getMyProfile(id);
         res.status(200).json(results);
       } catch (err) {
-              return res.status(400).json(err);
+              next(err)
             }
   }
 

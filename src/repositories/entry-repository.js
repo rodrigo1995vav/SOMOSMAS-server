@@ -5,13 +5,7 @@ const getEntryById = async (id) =>{
     return entry
 }
 
-const findById=async (id)=>{
-  const entry =await Entry.findOne({where:{ id:id }})
-  if (!entry){
-    return "Entry does not exist"
-  }
-  return entry
-}
+
 
 const createEntry = async( entry ) => {
   const entryStored = await Entry.create( entry );
@@ -40,7 +34,6 @@ const findAllNews = async() => {
 
 
 module.exports = {
-  findById,
   updateEntry,
   getEntryById,
   findAllNews,

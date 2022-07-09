@@ -2,7 +2,7 @@
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('testimonies', [{
+    await queryInterface.bulkInsert('testimonials', [{
       name: 'Demo test 1',
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
       content: 'This is the demo activity number 1',

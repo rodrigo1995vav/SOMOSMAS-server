@@ -1,3 +1,5 @@
+
+const { CredentialsTakenError, UserNotFoundError, UsersTableEmptyError } = require('../errors/user-errors')
 const userRepository = require('../repositories/user-repository')
 
 
@@ -7,7 +9,7 @@ const getUserByEmail = async (email) => {
     const user = await userRepository.getUserByEmail(email)
 
     if (!user) {
-        throw new Error(`El usuario con email: ${email} no existe`)
+        throw new UserNotFoundError({email})
     }
 
     return user
@@ -18,7 +20,7 @@ const userRegister = async (newUser) => {
     const user = await userRepository.getUserByEmail(newUser.email)
 
     if (user) {
-        throw new Error(`Usuario con email: ${newUser.email} ya existe.`)
+        throw new CredentialsTakenError(newUser.email)
     }
     const password = bcrypt.hashSync(newUser.password, 10);
     newUser.password = password
@@ -30,7 +32,13 @@ const userRegister = async (newUser) => {
 
 
 const getAllUsers = async (page) => {
-    const usersForPage = userRepository.getAllUsers(page)
+    
+    const usersForPage = await userRepository.getAllUsers(page)
+
+    if(!usersForPage){
+        throw new UsersTableEmptyError()
+    }
+
     return usersForPage
 }
 

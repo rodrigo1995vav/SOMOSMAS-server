@@ -11,7 +11,7 @@ const login = async (body) => {
         delete await user.password
         return { accessToken , user }
     } else {
-        throw new Error ("Contraseña incorrecta") 
+        throw new WrongPasswordError()
     }
 
 }
