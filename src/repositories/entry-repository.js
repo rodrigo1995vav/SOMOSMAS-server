@@ -33,11 +33,16 @@ const findAllNews = async() => {
     
     return entries;
   }
-
+  const deleteEntry = async(id) => {
+    const deletedEntry = await Entry.findById({ where:{ id : id } });
+    await deletedEntry.destroy()
+    return deletedEntry
+   }
 
 module.exports = {
   updateEntry,
   getEntryById,
   findAllNews,
   createEntry,
+  deleteEntry
 }
