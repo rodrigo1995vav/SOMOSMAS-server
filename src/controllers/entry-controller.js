@@ -35,6 +35,20 @@ class EntryDto {
     }
 }
 
+const deleteEntry = async (req, res, next ) => {
+  const entryId = Number(req.params.id)
+
+  try{
+
+   const deletedEntry = await entryService.deleteEntry(entryId)
+    res.status(200).json({deleted:deletedEntry})
+    }
+  catch (err) {
+  res.status(400)
+  res.json({error:err.message});
+  }
+}
+
 const updateNewsEntry = async (req,res,next)=>{
    
     const newsEntryDto = new EntryDto ({...req.body, id: req.params.id, type: 'news'});
@@ -100,5 +114,6 @@ module.exports = {
   getNewsEntries,
   getNewsEntryById,
   updateNewsEntry,
-  createNewEntry
+  createNewEntry,
+  deleteEntry,
 }
