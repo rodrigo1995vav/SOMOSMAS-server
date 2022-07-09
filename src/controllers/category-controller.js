@@ -1,38 +1,27 @@
 const categoryService = require('../services/category-service')
+const { validationResult } = require('express-validator')
 
 
-class CategoryDto {
-    constructor({id, name ,description = ''}){
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
-
-    validateName(){
-       
-        if( !this.name) {
-            throw new Error('Por favor completar el nombre')
-        }
-        console.log(typeof(this.name))
-        if(!(typeof(this.name) === 'string')){
-            throw new Error('El nombre debe ser tipo String')
-        }
-     
-    }
-}
 
 
 const createCategory = async (req, res) =>{
 
-    const categoryDto = new CategoryDto ({...req.body , id: req.params.id})
+    const { body } = req
 
+    const errorsRegister = validationResult(req);
+    
     try {
-     categoryDto.validateName()
+  
+        if (!errorsRegister.isEmpty()) {
+            res.status(406).json(errorsRegister.mapped()) 
+        } else {
+            const newCategory =  await categoryService.createCategory( { ...body} )
 
-     const newCategory =  await categoryService.createCategory(categoryDto)
+            res.json({categoryCreated: newCategory})
+        }
+    
 
-     res.json({categoryCreated: newCategory})
-
+   
     } catch (err) {
         res.status(400)
         res.json({error: err.message})
