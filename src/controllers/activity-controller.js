@@ -13,7 +13,7 @@ const getAllActivity = async (req, res, next) => {
     catch (err) {
      next(err)
     }
-
+  }
 const createNewActivity = async (req, res, next) => {
   try {
     const image = await fileServices.checkFileAndUpload(req.file)
