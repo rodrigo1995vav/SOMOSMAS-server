@@ -11,8 +11,7 @@ const login = async (req, res, next) => {
             accessToken: data.accessToken
         })
     } catch (err) {
-        console.log(err)
-        res.status(400).json(err)
+       next(err)
     }
 }
 
@@ -30,8 +29,8 @@ const register = async (req, res, next) => {
         }
 
     } catch (err) {
-        console.log(err)
-        res.status(500).json(err)
+      
+        next(err)
 
     }
 }
