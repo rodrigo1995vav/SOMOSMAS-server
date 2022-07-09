@@ -12,7 +12,7 @@ router.get("/", entryController.getNewsEntries);
 
 router.get('/:id', entryController.getNewsEntryById)
 router.put("/:id" ,entryController.updateNewsEntry);
-
+router.delete('/:id',entryController.deleteEntry)
 router.post("/", [
     check('name', 'name field is required').not().isEmpty(),
     check('content', 'content field is required').not().isEmpty(),
