@@ -13,7 +13,13 @@ const getAllTestimonials = async (limit,page) => {
     return testimonialsForPage
 }
 
+const createTestimony = async( testimony ) =>{
+    const testimonyStored = await testimonialRepository.createTestimony(testimony);
+    return testimonyStored;
+  }
+
 
 module.exports= {
     getAllTestimonials,
+    createTestimony
 }

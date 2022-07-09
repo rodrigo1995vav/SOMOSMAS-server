@@ -15,8 +15,18 @@ const listActivities = async (page) => {
     return { total_activities: count, activities: rows }
 }
 
+const postActivity = async (activity, imagePath) => {
+    console.log(imagePath)
+    activity.image = imagePath
+    console.log(activity.image)
+    //This will create a new row at the end of Activities table
+    const currentActivity = await Activity.create(activity)   
+    return (currentActivity)
+}
+
 
 
 module.exports = {
-    listActivities
+    listActivities,
+    postActivity
 }
