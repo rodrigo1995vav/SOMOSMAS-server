@@ -6,7 +6,7 @@ class UserNotFoundError extends Error {
         this.message = 'No se encontró al usuario'
 
         if (email){
-        this.message = `Usuario con ${email} no se encontró`
+        this.message = `Usuario con email: ${email} no se encontró`
         }
 
         if(id){
