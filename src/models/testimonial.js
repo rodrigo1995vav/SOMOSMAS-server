@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Testimony.init({
+  Testimonial.init({
     name: DataTypes.STRING,
     image: DataTypes.STRING,
     content: DataTypes.STRING
@@ -21,5 +21,5 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     tableName: 'testimonials',
   });
-  return Testimony;
+  return Testimonial;
 };
