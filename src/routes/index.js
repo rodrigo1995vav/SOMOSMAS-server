@@ -9,6 +9,7 @@ const activitiesRoutes = require('./activities');
 const testimonialsRoutes = require('./testimonials')
 const categoriesRoutes = require('./categories')
 
+
 router.use("/users", usersRoutes)
 
 router.use("/auth", authRoutes);
@@ -20,6 +21,9 @@ router.use("/testimonials",testimonialsRoutes)
 router.use("/contacts", contactRoutes)
 router.use("/activity", activitiesRoutes);
 router.use("/categories", categoriesRoutes)
+
+
+
 
 
 module.exports = router;
