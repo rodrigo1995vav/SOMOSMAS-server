@@ -22,14 +22,14 @@ const deleteTestimonial = async (testimonialId) =>{
 
     return deletedTestimonial
 }
-const createTestimony = async( testimony ) =>{
-    const testimonyStored = await testimonialRepository.createTestimony(testimony);
-    return testimonyStored;
+const createTestimonial = async( testimonial ) =>{
+    const testimonialStored = await testimonialRepository.createTestimony(testimonial);
+    return testimonialStored;
   }
 
 
 module.exports= {
     getAllTestimonials,
     deleteTestimonial,
-    createTestimony
+    createTestimonial
 }

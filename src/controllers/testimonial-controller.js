@@ -34,15 +34,15 @@ const deleteTestimonial = async (req, res) =>{
         res.status(500).json({err: err.message})
     }
 }  
-const createNewTestimony = async (req, res) => {
+const createNewTestimonial = async (req, res) => {
     try {
         console.log(req)
         const image = await fileServices.checkFileAndUpload(req.file)
-        const testimonySaved = await testimonialService.createTestimony({
+        const testimonialSaved = await testimonialService.createTestimonial({
             ...req.body,
             image
         })
-        res.status(201).json(testimonySaved)
+        res.status(201).json(testimonialSaved)
     } catch (err) {
         res.status(500).json(err);
     }
@@ -51,5 +51,5 @@ const createNewTestimony = async (req, res) => {
 module.exports = {
     getAllTestimonials,
     deleteTestimonial,
-    createNewTestimony
+    createNewTestimonial
 }

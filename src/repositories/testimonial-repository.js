@@ -17,9 +17,9 @@ const getAllTestimonials = async (limit , page) => {
     return { total_testimonials: count, testimonials: rows }
 }
 
-const createTestimony = async (testimony) => {
-    const testimonyStored = await Testimonial.create(testimony)
-    return testimonyStored
+const createTestimonial = async (testimonial) => {
+    const testimonialStored = await Testimonial.create(testimonial)
+    return testimonialStored
 }
 
 
@@ -38,6 +38,6 @@ const deleteTestimonial = async (id) =>{
 module.exports= {
     getAllTestimonials,
     deleteTestimonial,
-    createTestimony
+    createTestimonial
 
 }
