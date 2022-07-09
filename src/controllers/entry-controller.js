@@ -44,8 +44,7 @@ const deleteEntry = async (req, res, next ) => {
     res.status(200).json({deleted:deletedEntry})
     }
   catch (err) {
-  res.status(400)
-  res.json({error:err.message});
+    next(err)
   }
 }
 

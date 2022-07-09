@@ -9,7 +9,7 @@ const deleteEntry = async (id) =>{
 
   if(!deletedEntry)
   {
-    throw new Error('La entrada no existe !!!')
+    throw new EntryNotFoundError()
   }
 return deletedEntry
 
@@ -32,8 +32,9 @@ const getModifiedNewsEntries = async() => {
   
   const entries = await entryRepository.findAllNews();
 
-  const modifiedEntries = entries.map( ({ name, image, createdAt }) => (
+  const modifiedEntries = entries.map( ({id, name, image, createdAt }) => (
       {
+        id,
         name,
         image, 
         createdAt
