@@ -2,7 +2,7 @@ const authService = require('../services/auth-service')
 const { processRegister } = require('../repositories/auth-repository');
 const userService = require('../services/user-service')
 const { validationResult } = require('express-validator')
-
+const { RegisterValidationError } = require('../errors/auth-errors')
 const login = async (req, res, next) => {
     try {
         const data = await authService.login(req.body)
@@ -21,7 +21,7 @@ const register = async (req, res, next) => {
         const errorsRegister = validationResult(req);
         if (!errorsRegister.isEmpty()) {
             //406 no Acceptable
-            res.status(406).json(errorsRegister.mapped()) //devuelvo los errores al front por si los necesita
+           throw new RegisterValidationError(errorsRegister.mapped()) //devuelvo los errores al front por si los necesita
         } else {
 
             const user = await userService.userRegister({ ...body })
