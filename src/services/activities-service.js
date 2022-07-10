@@ -1,3 +1,4 @@
+const { ActivitiesTableEmptyError } = require('../errors/activity-errors')
 const activitiesRepository = require('../repositories/activities-repository')
 
 const getAllActivities = async (page) => {

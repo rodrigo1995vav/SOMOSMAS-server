@@ -33,7 +33,7 @@ class EntryDto {
     }
 }
 
-const deleteEntryById = async (req, res, next ) => {
+const deleteEntry = async (req, res, next ) => {
   const entryId = Number(req.params.id)
 
   try{
@@ -111,5 +111,5 @@ module.exports = {
   getNewsEntryById,
   updateNewsEntry,
   createNewEntry,
-  deleteEntryById,
+  deleteEntry,
 }

@@ -1,6 +1,6 @@
 const { Entry } = require('../models')
 
-const getEntry = async (id) =>{
+const getEntryById = async (id) =>{
     const entry = await Entry.findOne({where:{id: id}})
     return entry
 }
@@ -39,7 +39,7 @@ const findAllNews = async() => {
     
     return entries;
   }
-  const deleteEntryById = async(id) => {
+  const deleteEntry = async(id) => {
     const deletedEntry = await Entry.findOne({ where:{ id : id } });
     await deletedEntry.destroy()
     return deletedEntry
