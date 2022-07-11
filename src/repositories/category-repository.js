@@ -1,0 +1,17 @@
+
+const { Category } = require('../models')
+
+const listAllCategory = async(page , limit)=>{
+    const offset = page*limit
+    const {count, rows} =await Category.findAndCountAll({
+        attributes: ['name'],
+        raw:true,        
+        offset:offset,
+        limit 
+    })
+  return { total_categories:count , current_page:page+1 , total_pages:Math.ceil(count/limit) , categories:rows}
+}
+
+module.exports={
+    listAllCategory
+}
