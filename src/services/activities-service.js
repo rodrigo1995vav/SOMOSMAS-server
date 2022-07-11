@@ -9,7 +9,13 @@ const updateActivities = async (id,data) => {
    return await activitiesRepository.updateActivities(id,data)
 }
 
+const createActivity = async (activity, imagePath) => {
+    const activities = await activitiesRepository.postActivity(activity,imagePath)
+    return activities
+}
+
 module.exports = {
     getAllActivities,
-    updateActivities
+    updateActivities,
+    createActivity
 }

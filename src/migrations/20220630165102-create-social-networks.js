@@ -14,6 +14,9 @@ module.exports = {
             link: {
                 type: Sequelize.STRING
             },
+            bootstrapIconName:{
+                type: Sequelize.STRING
+            },
             organization_id: {
                 type: Sequelize.INTEGER,
                 references: {
