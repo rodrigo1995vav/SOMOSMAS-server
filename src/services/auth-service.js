@@ -21,6 +21,9 @@ const login = async (body) => {
 
 const register = async (newUser) => {
 
+    //Esto se puede hacer mejor, la idea es que vean como se manejan los errores
+    //mas adelante lo voy a cmabiar para que queden menos lineas.
+
     try{
 
     const user = await userService.getUserByEmail(newUser.email)
