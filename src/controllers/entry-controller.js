@@ -1,4 +1,5 @@
 
+const { EntryValidationError } = require('../errors/entry-errors');
 const entryService = require('../services/entry-service')
 const { uploadFile } = require('../services/s3-service');
 
@@ -27,9 +28,22 @@ class EntryDto {
         
         if(msg!==''){
             const finalMsg = msg.slice(0, -1)
-            throw new Error ( `Llenar campos vacíos:${finalMsg}.` );
+            throw new EntryValidationError( `Llenar campos vacíos:${finalMsg}.`);
         }
     }
+}
+
+const deleteEntry = async (req, res, next ) => {
+  const entryId = Number(req.params.id)
+
+  try{
+
+   const deletedEntry = await entryService.deleteEntryById(entryId)
+    res.status(200).json({deleted:deletedEntry})
+    }
+  catch (err) {
+    next(err)
+  }
 }
 
 const updateNewsEntry = async (req,res,next)=>{
@@ -41,31 +55,23 @@ const updateNewsEntry = async (req,res,next)=>{
         const entry = await entryService.updateEntry(newsEntryDto)
         res.json({entry:entry});
     } catch (err) {
-        res.status(400)
-        res.json({error:err.message});
+      next(err)
     }
 }
 
-const getNewsEntries = async(req, res) => {
+const getNewsEntries = async(req, res, next) => {
+
   try {
       const entries = await entryService.getModifiedNewsEntries();
       res.status(200).json({ entries });
   } catch (err) {
-      console.log(err);
-      res.status(500).json({err})
+    next(err)
   }
 }
 
-const deleteEntriesById=async (req, res) => {
-  try{
-    const entries = await entryService.deleteEntryById(req.params.id)
-    res.status(200).json({ entries });
-  } catch (err) {
-    console.log(err);
-  }
-}
 
-const getNewsEntryById= async (req, res)=>{
+
+const getNewsEntryById= async (req, res, next)=>{
   const {id}=req.params
   try{
     const entries= await entryService.getNewsById(id)
@@ -75,12 +81,11 @@ const getNewsEntryById= async (req, res)=>{
       payload:entries
     })
   } catch (err) {
-    console.log('err',err)
-    res.status(500).json({err})
+    next(err)
   }
 }
 
-const createNewEntry = async(req, res) => {
+const createNewEntry = async(req, res, next) => {
 
   const { image, ...rest } = req.body;
 
@@ -106,5 +111,5 @@ module.exports = {
   getNewsEntryById,
   updateNewsEntry,
   createNewEntry,
-  deleteEntriesById
+  deleteEntry,
 }

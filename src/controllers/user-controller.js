@@ -8,8 +8,8 @@ const getUsers = async (req, res, next) => {
         const users = await userService.getAllUsers(page)
         res.status(200).json(users)
     } catch (err) {
-        console.log(err)
-        res.status(500).json(err)
+        
+        next(err)
     }
 }
 module.exports = {
