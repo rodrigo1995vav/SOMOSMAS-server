@@ -24,8 +24,11 @@ const register = async (req, res, next) => {
            throw new RegisterValidationError(errorsRegister.mapped()) //devuelvo los errores al front por si los necesita
         } else {
 
-            const user = await userService.userRegister({ ...body })
-            res.status(200).json(user)
+            const data = await authService.register({ ...body })
+            res.json({
+                user: data.user,
+                accessToken: data.accessToken
+            })
         }
 
     } catch (err) {

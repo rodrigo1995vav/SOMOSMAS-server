@@ -1,7 +1,6 @@
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { noExtendLeft } = require('sequelize/types/lib/operators');
 const { WrongPasswordError , CredentialsTakenError } = require('../errors/auth-errors');
 const { UserNotFoundError} = require('../errors/user-errors');
 const userService = require('../services/user-service')
@@ -38,7 +37,10 @@ const register = async (newUser) => {
             newUser.password = password
             newUser.roleId = 2
             await userService.saveUser(newUser)
-            return  await login({email: newUser.email , password: newUser.password})
+            const accessToken = await generateAccessToken(newUser)
+            delete newUser.password
+
+            return  { accessToken , user:newUser }
         }
         throw err
     }
@@ -71,6 +73,7 @@ const generateAccessToken = async (user)=>{
 
 
 module.exports = {
-  
+    getMyProfile,
+    register,
     login,
 }
