@@ -1,7 +1,9 @@
 
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { WrongPasswordError } = require('../errors/auth-errors');
+const { noExtendLeft } = require('sequelize/types/lib/operators');
+const { WrongPasswordError , CredentialsTakenError } = require('../errors/auth-errors');
+const { UserNotFoundError} = require('../errors/user-errors');
 const userService = require('../services/user-service')
 
 
@@ -16,6 +18,37 @@ const login = async (body) => {
         throw new WrongPasswordError()
     }
 
+}
+
+const register = async (newUser) => {
+
+    try{
+
+    const user = await userService.getUserByEmail(newUser.email)
+
+    if(user){
+        throw new CredentialsTakenError(newUser.email)
+    }
+    }
+    catch(err){
+
+        if (err instanceof UserNotFoundError){
+
+            const password = bcrypt.hashSync(newUser.password, 10);
+            newUser.password = password
+            newUser.roleId = 2
+            await userService.saveUser(newUser)
+            return  await login({email: newUser.email , password: newUser.password})
+        }
+        throw err
+    }
+
+
+ 
+    
+    
+   
+   
 }
 
 const getMyProfile = async (id) => {

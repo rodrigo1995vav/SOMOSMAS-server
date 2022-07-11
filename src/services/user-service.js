@@ -1,6 +1,5 @@
 
-const { CredentialsTakenError, UserNotFoundError, UsersTableEmptyError } = require('../errors/user-errors')
-const bcrypt = require('bcrypt')
+const { UserNotFoundError, UsersTableEmptyError } = require('../errors/user-errors')
 const userRepository = require('../repositories/user-repository')
 
 
@@ -16,21 +15,8 @@ const getUserByEmail = async (email) => {
     return user
 }
 
-const userRegister = async (newUser) => {
-
-    const user = await userRepository.getUserByEmail(newUser.email)
-   
-
-    if (user) {
-        throw new CredentialsTakenError(newUser.email)
-    }
-    const password = bcrypt.hashSync(newUser.password, 10);
-    newUser.password = password
-    newUser.roleId = 2
-    
-    const savedUser = await userRepository.saveUser(newUser)
-    delete savedUser.password
-    return savedUser
+const saveUser = async (user) => {
+ return await  userRepository.saveUser(user)
 }
 
 
@@ -47,6 +33,6 @@ const getAllUsers = async (page) => {
 
 module.exports = {
     getUserByEmail,
-    userRegister,
+    saveUser,
     getAllUsers,
 }

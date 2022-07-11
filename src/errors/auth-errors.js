@@ -41,9 +41,26 @@ class RegisterValidationError extends Error {
     }
 }
 
+class CredentialsTakenError extends Error {
+
+    constructor ( email = null ) {
+        super()
+        this.name = this.constructor.name
+        this.message = 'Ya existe un usuario con esas credenciales'
+
+        if (email){
+         this.message = `Usuario con email: ${email} ya existe.`
+        }
+   
+        this.code = 400
+    }
+  
+}
+
 module.exports ={
     WrongPasswordError,
     InvalidTokenError,
     ExpiredTokenError,
     RegisterValidationError,
+    CredentialsTakenError,
 }
