@@ -1,20 +1,38 @@
+
+
+const { EntryNotFoundError } = require('../errors/entry-errors');
 const entryRepository = require('../repositories/entry-repository')
+
+const deleteEntryById = async (id) =>{
+
+  const deletedEntry = await entryRepository.deleteEntryById(id)
+  
+  if(!deletedEntry)
+  {
+    throw new EntryNotFoundError()
+  }
+return deletedEntry
+
+
+}
 
 const updateEntry = async (newContent) =>{
    
    const entry = await entryRepository.updateEntry(newContent)
     
-    if( entry ){
-        throw new Error (`La entrada que desea modificar no existe !!!`);
+    if( !entry ){
+        throw new EntryNotFoundError (newContent.type);
     }
         return entry
 }
 
 const getModifiedNewsEntries = async() => {
-  const entries = await findAllNews();
+  
+  const entries = await entryRepository.findAllNews();
 
-  const modifiedEntries = entries.map( ({ name, image, createdAt }) => (
+  const modifiedEntries = entries.map( ({id, name, image, createdAt }) => (
       {
+        id,
         name,
         image, 
         createdAt
@@ -25,13 +43,15 @@ const getModifiedNewsEntries = async() => {
   return modifiedEntries;
 }
 
-const deleteEntryById = async (id) => {
- return await entryRepository.deleteEntry(id)
-}
+const getNewsById = async( id )=>{
+  const entry =  await entryRepository.getEntryById(id)
+    if( !entry ){
+      throw new EntryNotFoundError ('news');
+    }
+  return entry
 
-const getNewsById=async(id)=>{
-  return await findById(id)
-}
+  }
+
 
 const createEntry = async( entry ) =>{
   const entryStored = await entryRepository.createEntry( entry );

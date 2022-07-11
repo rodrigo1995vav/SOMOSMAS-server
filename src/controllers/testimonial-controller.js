@@ -1,5 +1,5 @@
 const testimonialService = require('../services/testimonial-service')
-const { uploadFile } = require('../services/s3-service');
+
 const fileServices = require("../services/fileServices");
 
 
@@ -14,8 +14,8 @@ const getAllTestimonials = async (req, res, next) => {
         res.json(allTestimonials)
     }
     catch (err) {
-
-        res.status(500).json(err)
+        
+        next(err)
     }
 
 }

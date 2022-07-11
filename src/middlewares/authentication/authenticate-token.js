@@ -10,12 +10,12 @@ const  authenticateToken = async (req,res,next)=>{
     const token = authHeader && authHeader.split(' ')[1]
   
     if(!token) {
-        throw new Error('Token inválido')
+        throw new InvalidTokenError()
     }
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET,  (err,decodedUser)=>{
 
         if(err){
-            throw new Error('Token expirado')
+            throw new ExpiredTokenError()
         }
         req.currentUser = decodedUser
        
