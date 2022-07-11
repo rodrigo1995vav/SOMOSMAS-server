@@ -5,8 +5,8 @@ const entryRepository = require('../repositories/entry-repository')
 
 const deleteEntryById = async (id) =>{
 
-  const deletedEntry = await entryRepository.deleteEntry(id)
-
+  const deletedEntry = await entryRepository.deleteEntryById(id)
+  
   if(!deletedEntry)
   {
     throw new EntryNotFoundError()
