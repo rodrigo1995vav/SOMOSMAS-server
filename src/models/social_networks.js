@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     Social_network.init({
         network: DataTypes.STRING,
         link: DataTypes.STRING,
+        bootstrapIconName: DataTypes.STRING,
         organization_id: DataTypes.INTEGER
     }, {
         sequelize,
