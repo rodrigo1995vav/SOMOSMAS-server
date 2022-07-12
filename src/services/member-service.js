@@ -3,12 +3,13 @@ const { MemberNotFoundError } = require('../errors/member-errors');
 
 
 const updateMember = async (newContent) => {
-    const member = await memberRepository.updateMember
+    console.log(newContent)
+    const member = await memberRepository.updateMember(newContent)
     if(!member){
+        console.log("error")
         throw new MemberNotFoundError(newContent.id)
     }
     return member
-
 }
 
 module.exports ={
