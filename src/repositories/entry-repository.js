@@ -5,6 +5,7 @@ const getEntryById = async (id) =>{
     return entry
 }
 
+
 const findById=async (id)=>{
   const entry =await Entry.findOne({where:{ id:id }})
   if (!entry){
@@ -22,27 +23,36 @@ const updateEntry = async (newContent) =>{
 
   const updatedEntry = await Entry.findOne({ where: { id:newContent.id,
                                                     type:newContent.type }})
-  if(updatedEntry){
-    updatedEntry.set(newContent)
-    await updatedEntry.save()
-    return updatedEntry
-  }
-  else{
+  if(!updatedEntry){
+  
     return null
   }
-
+  updatedEntry.set(newContent)
+  await updatedEntry.save()
+  return updatedEntry
 }
 
 const findAllNews = async() => {
+
     const entries = await Entry.findAll({ where:{ type:"news" } });
+    
     return entries;
   }
-
+  const deleteEntryById = async(id) => {
+   
+    const deletedEntry = await Entry.findOne({ where:{ id : id } });
+    if(!deletedEntry){
+      return null
+    }
+    await deletedEntry.destroy()
+    return deletedEntry
+   }
 
 module.exports = {
-  findById,
   updateEntry,
   getEntryById,
   findAllNews,
   createEntry,
+  deleteEntryById,
+  findById
 }

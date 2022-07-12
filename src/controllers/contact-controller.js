@@ -8,7 +8,7 @@ const storeContact = async (req, res, next) => {
         const contactStored = await contactService.createContact(newContact)
         res.json(contactStored)
     } catch (err) {
-        res.json(err)
+        next(err)
     }
 }
 

@@ -1,4 +1,5 @@
 const { Testimonial } = require('../models')
+const { Testimony, sequelize } = require('../models')
 
 const getAllTestimonials = async (limit , page) => {
 
@@ -16,9 +17,15 @@ const getAllTestimonials = async (limit , page) => {
     return { total_testimonials: count, testimonials: rows }
 }
 
+const createTestimony = async (testimony) => {
+    const testimonyStored = await Testimony.create(testimony)
+    return testimonyStored
+}
+
 
 
 module.exports= {
     getAllTestimonials,
+    createTestimony
 
 }
