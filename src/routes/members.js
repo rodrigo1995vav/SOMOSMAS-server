@@ -5,6 +5,6 @@ const router = express.Router();
 
 
 
-router.put('/:id'/*, checkAdminUser*/, memberController.updateMember)
+router.put('/:id', checkAdminUser, memberController.updateMember)
 
 module.exports = router
