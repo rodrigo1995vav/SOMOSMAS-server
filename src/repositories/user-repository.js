@@ -34,6 +34,9 @@ const getAllUsers = async(page)=>{
         offset: offset,
         limit: limit,
     })
+    if(count === 0){
+        return null
+    }
     //devuelvo un objeto con la cantidad de usuarios total que hay y un array con sos usuarios eliminado la password 
     return { total_users: count, users: rows }
 }
