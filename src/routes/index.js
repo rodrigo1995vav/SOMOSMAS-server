@@ -24,13 +24,10 @@ router.use("/contacts", contactRoutes)
 
 router.use("/activity", activitiesRoutes);
 
-<<<<<<< HEAD
 router.use("/members", memberRoutes);
 
 
-=======
 router.use("/categories", categoryRoutes);
->>>>>>> d78071341d038f1813df2ad1b52ac1e06042db73
 
 
 
