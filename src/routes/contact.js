@@ -4,6 +4,8 @@ const contactController = require('../controllers/contact-controller');
 const validateFields    = require('../middlewares/field-validator');
 const { check } = require('express-validator');
 
+router.get('/list', contactController.getContacts);
+
 router.post("/", [
     check('name', 'name field is required').not().isEmpty(),
     check('email', 'email field is required').isEmail(),
