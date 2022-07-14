@@ -5,7 +5,8 @@ const getUsers = async (req, res, next) => {
         const { query } = req
         console.log(query, 'query')
         const page = query.page - 1;
-        const users = await userService.getAllUsers(page)
+        query.page = query.page - 1
+        const users = await userService.getAllUsers(query)
         res.status(200).json(users)
     } catch (err) {
         

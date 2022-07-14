@@ -20,9 +20,9 @@ const saveUser = async (user) => {
 }
 
 
-const getAllUsers = async (page) => {
+const getAllUsers = async (query) => {
     
-    const usersForPage = await userRepository.getAllUsers(page)
+    const usersForPage = await userRepository.getAllUsers(query)
 
     if(!usersForPage){
         throw new UsersTableEmptyError()
