@@ -1,8 +1,6 @@
 const activitiesService = require("../services/activities-service");
 const fileServices = require("../services/fileServices");
 
-
-
 const getAllActivity = async (req, res, next) => {
     try {
         const { query } = req
@@ -30,7 +28,21 @@ const createNewActivity = async (req, res, next) => {
   }
 };
 
+const updateActivity =async (req, res) => {
+    try {
+        const data=req.body
+        const id=req.params.id
+        const updateActivities=await activitiesService.updateActivities(id,data)
+        res.status(200).json({updateActivities})
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+}
+
 module.exports = {
   getAllActivity,
+  updateActivity,
   createNewActivity,
 };
