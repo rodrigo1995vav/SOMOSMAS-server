@@ -14,6 +14,7 @@ const getListCategory = async (req, res) => {
 
 const deleteCategory = async (req, res) => {
   const categoryId = Number(req.params.id);
+  console.log(categoryId)
 
   try {
     const deletedCategory = await categoryService.deleteCategoryById(
