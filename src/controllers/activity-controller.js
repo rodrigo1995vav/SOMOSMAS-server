@@ -3,7 +3,7 @@ const fileServices = require("../services/fileServices");
 
 
 
-const activitiesService = require('../services/activities-service')
+//const activitiesService = require('../services/activities-service')
 
 const getAllActivity = async (req, res, next) => {
     try {

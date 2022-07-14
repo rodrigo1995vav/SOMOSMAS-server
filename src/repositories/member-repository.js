@@ -1,14 +1,12 @@
 const { Members ,sequelize } = require('../models')
 
 const updateMember = async (newContent) => {
-    const member = await Members.findOne({where:{id: newContent.id}})
-    if (!member){
+    const memberUpdated = await Members.update(newContent,{where:{id: newContent.id}})
+    if (memberUpdated[0]===0){
         
         return null
     }
-    member.set(newContent)
-    await member.save()
-    return member
+    return "Member updated"
 }
 
 module.exports={
