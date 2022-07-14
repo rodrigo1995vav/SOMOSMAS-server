@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const categoryController = require('../controllers/category-controller')
-const CategoryDataValidation = require ('../middlewares/validations/CategoryDataValidation')
+const CategoryDataValidation = require('../middlewares/validations/CategoryDataValidation')
 const checkAdminUser = require("../middlewares/authentication/check-admin-user");
 
 
-router.get('/', checkAdminUser ,categoryController.getListCategory)
+router.get('/list', checkAdminUser, categoryController.getListCategory)
 
-router.post("/",CategoryDataValidation, categoryController.createCategory);
+router.post("/", CategoryDataValidation, categoryController.createCategory);
 
 
 module.exports = router
