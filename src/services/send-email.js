@@ -16,10 +16,10 @@ const sendEmail = async (options) => {
 //   text: "Este es un email de prueba para testear si la función sendEmail funciona correctamente",
 // });
 
-const emailLayout = (name) => {
+const contactEmailLayout = (name) => {
   return "Hola "+ name + ". Gracias por contactarnos!"+ "\n\n" + "Nos comunicaremos con usted a la brevedad."+ "\n\n"+"Atentamente,"+ "\n\n"+"El equipo de Somos Mas"
 }
 module.exports = {
   sendEmail,
-  emailLayout
+  contactEmailLayout
 };
