@@ -5,4 +5,6 @@ const router = express.Router();
 
 router.get('/', checkAdminUser ,categoryControllers.getListCategory)
 
+router.delete('/:id',categoryControllers.deleteCategory)
+
 module.exports = router
