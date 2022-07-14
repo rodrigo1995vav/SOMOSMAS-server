@@ -22,10 +22,22 @@ const createTestimony = async (testimony) => {
     return testimonyStored
 }
 
+const updateTestimony = async (id, newContent) => {
+    const testimonyUpdated = await Testimonial.findOne({ where: { id: id } });
+    if (testimonyUpdated) {
+        testimonyUpdated.set(newContent);
+        await testimonyUpdated.save();
+        return testimonyUpdated;
+    } else {
+        return null;
+    }
+}
+
 
 
 module.exports= {
     getAllTestimonials,
-    createTestimony
+    createTestimony,
+    updateTestimony
 
 }

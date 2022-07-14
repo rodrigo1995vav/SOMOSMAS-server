@@ -13,5 +13,6 @@ router.post("/",
   validateCreateTestimony,
   testimonialController.createNewTestimony);
 
+  router.put("/update/:id", testimonialController.updateTestimony);
 
 module.exports = router;
