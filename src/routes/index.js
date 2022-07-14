@@ -19,8 +19,10 @@ router.use("/organizations", organizationsRoutes)
 router.use("/news", newsRoutes);
 router.use("/testimonials",testimonialsRoutes)
 router.use("/contacts", contactRoutes)
+
 router.use("/activity", activitiesRoutes);
 router.use("/categories", categoriesRoutes)
+
 
 
 
