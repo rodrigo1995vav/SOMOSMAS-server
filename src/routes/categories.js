@@ -5,7 +5,7 @@ const CategoryDataValidation = require('../middlewares/validations/CategoryDataV
 const checkAdminUser = require("../middlewares/authentication/check-admin-user");
 
 
-router.get('/list', checkAdminUser, categoryController.getListCategory)
+router.get('/', checkAdminUser, categoryController.getListCategory)
 
 router.post("/", CategoryDataValidation, categoryController.createCategory);
 
