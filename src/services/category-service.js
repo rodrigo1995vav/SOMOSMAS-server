@@ -1,5 +1,20 @@
 const { CategoriesTableEmptyError } = require("../errors/category-errors")
 const categoryRepository = require("../repositories/category-repository")
+const { CouldNotSaveCategoryError } = require('../errors/category-errors')
+
+
+const createCategory = async (newCategory) => {
+
+    const savedCategory = await categoryRepository.saveCategory(newCategory)
+
+    if(!savedCategory){
+        throw new CouldNotSaveCategoryError(newCategory.name)
+    }
+
+    return savedCategory
+
+}
+
 
 const getAllCategories = async (query)=>{
 const page = query.page -1
@@ -19,7 +34,9 @@ const deleteCategoryById = async (id) =>{
   return deletedCategory 
   
   }
+
 module.exports={
     getAllCategories,
-    deleteCategoryById
+    deleteCategoryById,
+    createCategory
 }
