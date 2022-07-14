@@ -8,6 +8,9 @@ const listActivities = async (page) => {
         offset: offset,
         limit: limit,
     })
+    if (count === 0){
+        return null
+    }
     //devuelvo un objeto con la cantidad de usuarios total que hay y un array con sos usuarios eliminado la password 
     return { total_activities: count, activities: rows }
 }
