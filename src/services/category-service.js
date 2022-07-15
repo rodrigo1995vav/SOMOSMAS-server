@@ -27,7 +27,7 @@ const deleteCategoryById = async (id) =>{
 
     const deletedCategory = await categoryRepository.deleteCategoryById(id)
     
-    if(!deletedCategory)
+    if(deletedCategory === 0)
     {
       throw new CategoriesTableEmptyError(id)
     }

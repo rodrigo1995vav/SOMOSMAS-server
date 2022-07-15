@@ -1,5 +1,5 @@
 const categoryService = require("../services/category-service");
-const { validationResult } = require('express-validator')
+const { validationResult } = require("express-validator");
 
 const getListCategory = async (req, res) => {
   try {
@@ -14,49 +14,44 @@ const getListCategory = async (req, res) => {
 
 const deleteCategory = async (req, res) => {
   const categoryId = Number(req.params.id);
-  console.log(categoryId)
 
   try {
     const deletedCategory = await categoryService.deleteCategoryById(
       categoryId
     );
-    res.status(201).json({message: "Categoria eliminada exitosamente", deleted: deletedCategory});
+    res
+      .status(201)
+      .json({
+        message: "Categoria eliminada exitosamente",
+        deleted: deletedCategory,
+      });
   } catch (err) {
-    console.log(err)
-    res.status(500).json(err)
+    console.log(err);
+    res.status(500).json(err);
   }
 };
 
-const createCategory = async (req, res) =>{
+const createCategory = async (req, res) => {
+  const { body } = req;
 
-    const { body } = req
+  const errorsRegister = validationResult(req);
 
-    const errorsRegister = validationResult(req);
-    
-    try {
-  
-        if (!errorsRegister.isEmpty()) {
-            res.status(406).json(errorsRegister.mapped()) 
-        } else {
-            const newCategory =  await categoryService.createCategory( { ...body} )
+  try {
+    if (!errorsRegister.isEmpty()) {
+      res.status(406).json(errorsRegister.mapped());
+    } else {
+      const newCategory = await categoryService.createCategory({ ...body });
 
-            res.json({categoryCreated: newCategory})
-        }
-    
-
-   
-    } catch (err) {
-        res.status(400)
-        res.json({error: err.message})
+      res.json({ categoryCreated: newCategory });
     }
-}
-
-
-
-
+  } catch (err) {
+    res.status(400);
+    res.json({ error: err.message });
+  }
+};
 
 module.exports = {
-    createCategory,
-    getListCategory,
+  createCategory,
+  getListCategory,
   deleteCategory,
-}
+};

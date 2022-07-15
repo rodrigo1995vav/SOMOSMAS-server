@@ -17,33 +17,24 @@ const listAllCategory = async (page, limit) => {
 };
 
 const deleteCategoryById = async (id) => {
-  const deletedCategory = await Category.findOne({ where: { id: id } });
-  if (!deletedCategory) {
-    return null;
-  }
-  await deletedCategory.destroy();
+  const deletedCategory = await Category.destroy({ where: { id: id } });
   return deletedCategory;
 };
 
-
 const saveCategory = async (newCategory) => {
+  // if newCategory id is not null, it will update the category. If id is null it will create a new register
 
-    // if newCategory id is not null, it will update the category. If id is null it will create a new register
+  const instancedCategory = Category.build(newCategory, {
+    isNewRecord: !newCategory.id,
+  });
 
-    const instancedCategory = Category.build( newCategory,{ isNewRecord: !newCategory.id } )
+  await instancedCategory.save();
 
-    await instancedCategory.save()
-
-    return instancedCategory
-}
-
-
-
-
+  return instancedCategory;
+};
 
 module.exports = {
-    saveCategory,
-    deleteCategoryById,
-    listAllCategory
-}
-
+  saveCategory,
+  deleteCategoryById,
+  listAllCategory,
+};
