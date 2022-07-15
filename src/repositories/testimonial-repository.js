@@ -22,18 +22,13 @@ const createTestimony = async (testimony) => {
     return testimonyStored
 }
 
-const updateTestimony = async (id, newContent) => {
-    const testimonyUpdated = await Testimonial.findOne({ where: { id: id } });
-    if (testimonyUpdated) {
-        testimonyUpdated.set(newContent);
-        await testimonyUpdated.save();
-        return testimonyUpdated;
-    } else {
-        return null;
+const updateTestimony = async (newContent) => {
+    const testimonyUpdated = await Testimonial.update(newContent,{ where: { id: newContent.id } });
+    if (testimonyUpdated[0] === 0) {
+        throw new Error('El testimonio que desea modificar no existe.');
     }
+    return "Testimonio actualizado";
 }
-
-
 
 module.exports= {
     getAllTestimonials,

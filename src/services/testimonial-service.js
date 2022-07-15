@@ -18,9 +18,9 @@ const createTestimony = async( testimony ) =>{
     return testimonyStored;
   }
 
-  const updateTestimony = async (id, newContent) => {
-    const testimonyUpdated = await testimonialRepository.updateTestimony(id, newContent);
-    if (testimonyUpdated) {
+  const updateTestimony = async (newContent) => {
+    const testimonyUpdated = await testimonialRepository.updateTestimony(newContent);
+    if (!testimonyUpdated) {
         throw new Error('El testimonio que desea modificar no existe.');
     }
     return testimonyUpdated;
