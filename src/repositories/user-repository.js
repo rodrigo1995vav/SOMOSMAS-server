@@ -36,11 +36,10 @@ const getAllUsers = async(page)=>{
 }
 
 const deleteUserById = async (id) =>{
-    const user = await User.findOne({where:{id: id}})
+    const user = await User.destroy({where:{id: id}})
     if (!user){
         return "User does not exist"
     }
-    await user.destroy()
     return "User deleted"
 }
 
