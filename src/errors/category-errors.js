@@ -12,6 +12,15 @@ class CouldNotSaveCategoryError extends Error {
   
 }
 
+class thereIsNoCategory extends Error{
+  constructor(){
+    super()
+    this.name = this.constructor.name
+    this.message = 'No se pudo encontrar la categoría'   
+    this.code = 404
+}}
+
 module.exports = {
     CouldNotSaveCategoryError,
+    thereIsNoCategory
 }

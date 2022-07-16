@@ -29,12 +29,20 @@ const listAllCategory = async (page, limit) => {
 }
 
 
-
-
+const getCategoryById = async (id) => {
+    const category = await Category.findOne({
+        where: {
+            id: id
+        },
+    })
+    return category
+}
 
 
 module.exports = {
     saveCategory,
-    listAllCategory
+    listAllCategory,
+    getCategoryById,
+
 }
 
