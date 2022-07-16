@@ -1,8 +1,8 @@
 const express = require("express");
-const categoryControllers = require("../controllers/category-cntroller");
+const  memberController = require("../controllers/memeber-controller");
 const checkAdminUser = require("../middlewares/authentication/check-admin-user");
 const router = express.Router();
 
-router.get('/', checkAdminUser ,categoryControllers.getListCategory)
+router.get('/',checkAdminUser,memberController.getListMember)
 
 module.exports = router
