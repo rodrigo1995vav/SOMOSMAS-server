@@ -31,8 +31,7 @@ const deleteCategory = async (req, res) => {
   }
 };
 
-const createCategory = async (req, res) => {
-  const { body } = req;
+const createCategory = async (req, res) =>{
 
   const errorsRegister = validationResult(req);
 
