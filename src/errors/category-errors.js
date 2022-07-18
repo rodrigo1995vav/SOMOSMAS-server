@@ -1,3 +1,14 @@
+class CategoriesTableEmptyError extends Error {
+
+    constructor( id = null ){
+        super()
+        this.name = this.constructor.name
+        this.message = `La categoria con id: ${id} que trata de eliminar no existe`
+
+    }
+
+}
+
 class CouldNotSaveCategoryError extends Error {
 
     constructor(category = null){
@@ -12,6 +23,8 @@ class CouldNotSaveCategoryError extends Error {
   
 }
 
+
 module.exports = {
-    CouldNotSaveCategoryError,
+    CategoriesTableEmptyError,
+    CouldNotSaveCategoryError
 }

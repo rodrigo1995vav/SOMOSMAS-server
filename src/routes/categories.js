@@ -9,5 +9,9 @@ router.get('/', checkAdminUser, categoryController.getListCategory)
 
 router.post("/", CategoryDataValidation, categoryController.createCategory);
 
+router.delete('/:id',categoryController.deleteCategory)
+
+router.get('/', checkAdminUser ,categoryController.getListCategory)
+
 
 module.exports = router
