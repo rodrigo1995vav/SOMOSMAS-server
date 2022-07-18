@@ -5,14 +5,14 @@ const CategoryDataValidation = require('../middlewares/validations/CategoryDataV
 const checkAdminUser = require("../middlewares/authentication/check-admin-user");
 
 
-router.get('/', checkAdminUser, categoryController.getListCategory)
+router.get('/', categoryController.getListCategory)
 
 router.put('/:id', checkAdminUser, CategoryDataValidation, categoryController.updateCategory)
 router.post("/", CategoryDataValidation, categoryController.createCategory);
 
-router.delete('/:id',categoryController.deleteCategory)
+router.delete('/:id', categoryController.deleteCategory)
 
-router.get('/', checkAdminUser ,categoryController.getListCategory)
+router.get('/', checkAdminUser, categoryController.getListCategory)
 
 
 module.exports = router

@@ -26,11 +26,9 @@ const updateCategory = async (id, body) => {
     if (!checkCategory) {
         throw new thereIsNoCategory()
     }
-    checkCategory.name = body.name;
-    checkCategory.description = body.description;
-    checkCategory.updatedAt = new Date();
+    body.updatedAt = new Date();
+    checkCategory.set(body)
     const updatedCategory = await checkCategory.save()//de esta forma retorna la data para el front, paran o hacer un nuevo pedido para actualizar al data 
-
     return updatedCategory
 }
 
