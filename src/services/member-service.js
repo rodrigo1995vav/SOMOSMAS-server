@@ -13,16 +13,25 @@ const updateMember = async (newContent) => {
 }
 
 const deleteMember = async (memberId) => {
-    console.log(memberId)
     const member = await memberRepository.deleteMember(memberId)
-    if(!member){
+    console.log(member)
+    if(member === 0){
         console.log("error")
         throw new MemberNotFoundError(memberId)
     }
     return member
 }
 
+
+const getListAllMembers= async(query)=>{
+    const page = Number(query.page) -1 ;
+    const limit = Number(query.limit) || 10
+    const members= await memberRepository.getAllMembers(page,limit)
+    return members
+}
+
 module.exports ={
     updateMember,
-    deleteMember
+    deleteMember,
+    getListAllMembers
 } 

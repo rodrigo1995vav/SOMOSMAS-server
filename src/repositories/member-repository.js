@@ -12,17 +12,22 @@ const updateMember = async (newContent) => {
 }
 
 const deleteMember = async (id) => {
-    const member = await Members.findByPk(id)
-    if (!member){
-        return null
-    }
-    member.destroy()
+    console.log("asd",id)
+    const member = await Members.destroy({ where: { id: id } })
+
     return member
 }
 
-
-
+const getAllMembers = async(page,limit)=>{
+    const offset = page*limit;
+   const {count, rows }= await Members.findAndCountAll({
+        offset : offset,
+        limit: limit
+   })
+   return {total_members : count , total_pages: Math.ceil(count/limit), current_page:page+1, members:rows }
+}
 module.exports={
+    getAllMembers,
     updateMember,
     deleteMember
-} 
+}
