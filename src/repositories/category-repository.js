@@ -34,12 +34,16 @@ const listAllCategory = async (page, limit) => {
 }
 
 
-const getCategoryById = async (id) => {
-    const category = await Category.findOne({
-        where: {
-            id: id
+const updateCategory = async (id, body) => {
+    const category = await Category.update(
+        {
+            ...body
         },
-    })
+        {
+            where: {
+                id: id
+            },
+        })
     return category
 }
 
@@ -47,7 +51,7 @@ const getCategoryById = async (id) => {
 module.exports = {
     saveCategory,
     listAllCategory,
-    getCategoryById,
+    updateCategory,
     deleteCategoryById
 }
 
