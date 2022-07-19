@@ -1,9 +1,6 @@
 const activitiesService = require("../services/activities-service");
 const fileServices = require("../services/fileServices");
 
-
-
-
 const getAllActivity = async (req, res, next) => {
     try {
         const { query } = req
