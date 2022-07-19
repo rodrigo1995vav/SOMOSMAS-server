@@ -74,8 +74,17 @@ const getAllUsers = async (query) => {
   return { total_users: count, users: rows };
 };
 
+const deleteUserById = async (id) =>{
+    const user = await User.destroy({where:{id: id}})
+    if (!user){
+        return "User does not exist"
+    }
+    return "User deleted"
+}
+
 module.exports = {
-  getUserByEmail,
-  saveUser,
-  getAllUsers,
-};
+    getUserByEmail,
+    saveUser,
+    getAllUsers,
+    deleteUserById
+}
