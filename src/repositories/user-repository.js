@@ -49,9 +49,21 @@ const deleteUserById = async (id) =>{
     return "User deleted"
 }
 
+
+const updateUserById = async (updatedUserData) => {
+    const user = await User.update(updatedUserData, {
+        where: { id: updatedUserData.id },
+      })
+    if (user[0] === 0){
+        return "User does not exist"
+    }
+    return "User information updated"
+}
+
 module.exports = {
     getUserByEmail,
     saveUser,
     getAllUsers,
-    deleteUserById
+    deleteUserById,
+    updateUserById
 }

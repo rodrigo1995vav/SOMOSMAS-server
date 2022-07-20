@@ -39,9 +39,19 @@ const deleteUserById = async (id) => {
     return user;
 }
 
+const updateUserById = async (updatedUserData) => {
+    const user = await userRepository.updateUserById(updatedUserData)
+    if (!user) {
+        throw new Error(`El usuario con id: ${id} no existe`)
+    }
+    return user;
+}
+
+
 module.exports = {
     getUserByEmail,
     saveUser,
     getAllUsers,
-    deleteUserById
+    deleteUserById,
+    updateUserById
 }
