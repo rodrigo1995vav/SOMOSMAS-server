@@ -97,11 +97,6 @@ module.exports = {
     getUserByEmail,
     saveUser,
     getAllUsers,
-<<<<<<< HEAD
     deleteUserById,
     updateUserById
 }
-=======
-    deleteUserById
-}
->>>>>>> feature/OT221-51-search
