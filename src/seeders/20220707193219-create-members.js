@@ -1,69 +1,96 @@
 'use strict';
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('members', [
-      {
-      name: 'Demo members 1',
-      image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-    },
-    {
-      name: 'Demo members 2',
-      image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-    },
-    {
-      name: 'Demo members 3',
-      image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-    },
-    {
-        name: 'Demo members 4',
-        image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      },
-      {
-        name: 'Demo members 5',
-        image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      },
-      {
-        name: 'Demo members 6',
-        image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      }, {
-        name: 'Demo members 7',
-        image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      },
-      {
-        name: 'Demo members 8',
-        image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      },
-      {
-        name: 'Demo members 9',
-        image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      }, {
-        name: 'Demo members 10',
-        image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      },
-      {
-        name: 'Demo members 11',
-        image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      },
-      {
-        name: 'Demo members 12',
-        image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      }, {
-        name: 'Demo members 13',
-        image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      },
-      {
-        name: 'Demo members 14',
-        image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      },
-      {
-        name: 'Demo members 15',
-        image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      },
-  ], {});
-},
+    async up(queryInterface, Sequelize) {
+        await queryInterface.bulkInsert('members', [
+            {
+                name: "Charles Morris",
+                image: "https://reqres.in/img/faces/5-image.jpg",
+                description:
+                    "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia dolor suscipit obcaecati dolorum deleniti optio aliquam repudiandae rerum quo aliquid. Maxime rem voluptates odio omnis ipsam? Ab atque eius sit!",
+                roleOngId: 1
+            },
+            {
+                name: "George Bluth",
+                image: "https://reqres.in/img/faces/1-image.jpg",
+                description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia dolor suscipit obcaecati dolorum deleniti optio aliquam repudiandae rerum quo aliquid. Maxime rem voluptates odio omnis ipsam? Ab atque eius sit!",
+                roleOngId: 3
+            },
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('members', null,);
-  }
+            {
+                name: "Janet Weaver",
+                image: "https://reqres.in/img/faces/2-image.jpg",
+                description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia dolor suscipit obcaecati dolorum deleniti optio aliquam repudiandae rerum quo aliquid. Maxime rem voluptates odio omnis ipsam? Ab atque eius sit!",
+                roleOngId: 2
+            },
+
+            {
+                name: "Emma Wong",
+                image: "https://reqres.in/img/faces/3-image.jpg",
+                description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia dolor suscipit obcaecati dolorum deleniti optio aliquam repudiandae rerum quo aliquid. Maxime rem voluptates odio omnis ipsam? Ab atque eius sit!",
+                roleOngId: 3
+            },
+
+            {
+                name: "Eve Holt",
+                image: "https://reqres.in/img/faces/4-image.jpg",
+                description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia dolor suscipit obcaecati dolorum deleniti optio aliquam repudiandae rerum quo aliquid. Maxime rem voluptates odio omnis ipsam? Ab atque eius sit!",
+                roleOngId: 2
+            },
+
+            {
+                name: "Tracey Ramos",
+                image: "https://reqres.in/img/faces/6-image.jpg",
+                description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia dolor suscipit obcaecati dolorum deleniti optio aliquam repudiandae rerum quo aliquid. Maxime rem voluptates odio omnis ipsam? Ab atque eius sit!",
+                roleOngId: 2
+            },
+
+            {
+                name: "Michael Lawson",
+                image: "https://reqres.in/img/faces/7-image.jpg",
+                description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia dolor suscipit obcaecati dolorum deleniti optio aliquam repudiandae rerum quo aliquid. Maxime rem voluptates odio omnis ipsam? Ab atque eius sit!",
+                roleOngId: 3
+            },
+
+            {
+                name: "Lindsay Ferguson",
+                image: "https://reqres.in/img/faces/8-image.jpg",
+                description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia dolor suscipit obcaecati dolorum deleniti optio aliquam repudiandae rerum quo aliquid. Maxime rem voluptates odio omnis ipsam? Ab atque eius sit!",
+                roleOngId: 2
+            },
+
+            {
+                name: "Tobias Funke",
+                image: "https://reqres.in/img/faces/9-image.jpg",
+                description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia dolor suscipit obcaecati dolorum deleniti optio aliquam repudiandae rerum quo aliquid. Maxime rem voluptates odio omnis ipsam? Ab atque eius sit!",
+                roleOngId: 2
+            },
+
+            {
+                name: "Byron Fields",
+                image: "https://reqres.in/img/faces/10-image.jpg",
+                description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia dolor suscipit obcaecati dolorum deleniti optio aliquam repudiandae rerum quo aliquid. Maxime rem voluptates odio omnis ipsam? Ab atque eius sit!",
+                roleOngId: 3
+            },
+
+            {
+                name: "George Edwards",
+                image: "https://reqres.in/img/faces/11-image.jpg",
+                description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia dolor suscipit obcaecati dolorum deleniti optio aliquam repudiandae rerum quo aliquid. Maxime rem voluptates odio omnis ipsam? Ab atque eius sit!",
+                roleOngId: 1
+            },
+
+        ], {});
+    },
+
+
+    async down(queryInterface, Sequelize) {
+        await queryInterface.bulkDelete('members', null,);
+    }
 };
+
+
+
+[
+
+]
