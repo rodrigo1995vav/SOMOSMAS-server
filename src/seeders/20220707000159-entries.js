@@ -13,7 +13,7 @@ module.exports = {
     */
      await queryInterface.bulkInsert('entries', [{
       name: 'Demo news 1',
-      image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
+      image: '1b84c3f95c84088e0fa6a4ff54f9a90e',
       content: 'This is the demo news number 1',
       type: 'news',
       categoryId: 1,
@@ -22,7 +22,7 @@ module.exports = {
     },
     {
       name: 'Demo news 2',
-      image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
+      image: '1b84c3f95c84088e0fa6a4ff54f9a90e',
       content: 'This is the demo news number 2',
       type: 'news',
       categoryId: 1,
@@ -31,7 +31,7 @@ module.exports = {
     },
     {
       name: 'Demo news 3',
-      image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
+      image: '1b84c3f95c84088e0fa6a4ff54f9a90e',
       content: 'This is the demo news number 3',
       type: 'news',
       categoryId: 1,
@@ -40,7 +40,7 @@ module.exports = {
     },
     {
       name: 'Demo news 4',
-      image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
+      image: '1b84c3f95c84088e0fa6a4ff54f9a90e',
       content: 'This is the demo news number 4',
       type: 'news',
       categoryId: 1,
@@ -49,7 +49,7 @@ module.exports = {
     },
     {
       name: 'Demo event 5',
-      image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
+      image: '1b84c3f95c84088e0fa6a4ff54f9a90e',
       content: 'This is the demo event number 5',
       type: 'event',
       categoryId: 1,
@@ -58,7 +58,7 @@ module.exports = {
     },
     {
       name: 'Demo activity 6',
-      image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
+      image: '1b84c3f95c84088e0fa6a4ff54f9a90e',
       content: 'This is the demo activity number 6',
       type: 'event',
       categoryId: 1,
@@ -67,7 +67,7 @@ module.exports = {
     },
     {
       name: 'Demo activity 7',
-      image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
+      image: '1b84c3f95c84088e0fa6a4ff54f9a90e',
       content: 'This is the demo activity number 7',
       type: 'event',
       categoryId: 1,
@@ -76,7 +76,7 @@ module.exports = {
     },
     {
       name: 'Demo activity 8',
-      image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
+      image: '1b84c3f95c84088e0fa6a4ff54f9a90e',
       content: 'This is the demo activity number 8',
       type: 'news',
       categoryId: 1,
@@ -85,7 +85,7 @@ module.exports = {
     },
     {
       name: 'Demo activity 9',
-      image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
+      image: '1b84c3f95c84088e0fa6a4ff54f9a90e',
       content: 'This is the demo activity number 9',
       type: 'news',
       categoryId: 1,
