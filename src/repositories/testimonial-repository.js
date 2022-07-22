@@ -4,8 +4,7 @@ const { Testimonial } = require('../models')
 const getAllTestimonials = async (limit , page) => {
 
 
-    const offset = page * limit;
-
+    const offset = (page-1) * limit;
     const { count, rows } = await Testimonial.findAndCountAll({
         offset: offset,
         limit: limit,
@@ -14,7 +13,12 @@ const getAllTestimonials = async (limit , page) => {
             return null
         }
 
-    return { total_testimonials: count, testimonials: rows }
+            let pageCount =  Math.trunc(count / limit) 
+            count % limit > 0 && ( pageCount += 1 )
+
+            
+
+    return { total_testimonials: count, testimonials: rows , pageCount}
 }
 
 const createTestimonial = async (testimonial) => {
@@ -24,12 +28,12 @@ const createTestimonial = async (testimonial) => {
 
 
 const deleteTestimonial = async (id) =>{
-  const testimonialInstance =  await Testimonial.findOne({ where: { id: id } })
+  const testimonialInstance =  await Testimonial.destroy({ where: { id: id } })
 
-  if ( !testimonialInstance){
+  if ( testimonialInstance === 0 ){
     return null
 }
-  await testimonialInstance.destroy()
+
   
   return testimonialInstance
 }
