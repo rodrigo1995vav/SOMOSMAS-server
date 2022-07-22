@@ -30,11 +30,13 @@ const getModifiedNewsEntries = async() => {
   
   const entries = await entryRepository.findAllNews();
 
-  const modifiedEntries = entries.map( ({id, name, image, createdAt }) => (
+  const modifiedEntries = entries.map( ({id, name, image,content,type, createdAt }) => (
       {
         id,
         name,
-        image, 
+        image,
+        content,
+        type, 
         createdAt
       }
     ) 

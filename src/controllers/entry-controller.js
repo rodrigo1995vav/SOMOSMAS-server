@@ -1,6 +1,7 @@
 
 const { EntryValidationError } = require('../errors/entry-errors');
-const entryService = require('../services/entry-service')
+const entryService = require('../services/entry-service');
+const { checkFileAndUpload } = require('../services/fileServices');
 const { uploadFile } = require('../services/s3-service');
 
 class EntryDto {
@@ -47,11 +48,17 @@ const deleteEntry = async (req, res, next ) => {
 }
 
 const updateNewsEntry = async (req,res,next)=>{
+  console.log(req)
+
+   const image = await checkFileAndUpload(req.file)
+   console.log(image)
+   console.log("OTRO")
    
-    const newsEntryDto = new EntryDto ({...req.body, id: req.params.id, type: 'news'});
+    //const newsEntryDto = new EntryDto ({...req.body, id: req.params.id, type: 'news'});
+    const newsEntryDto = {...req.body, id: req.params.id, image: image, type: 'news'}
     
     try {
-        newsEntryDto.validate();
+        //newsEntryDto.validate();
         const entry = await entryService.updateEntry(newsEntryDto)
         res.json({entry:entry});
     } catch (err) {
