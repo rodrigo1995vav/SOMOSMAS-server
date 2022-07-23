@@ -68,8 +68,11 @@ const updateNewsEntry = async (req,res,next)=>{
 
 const getNewsEntries = async(req, res, next) => {
 
+  const page = Number(req.params.page)
+  const limit = Number(req.params.limit)
+
   try {
-      const entries = await entryService.getModifiedNewsEntries();
+      const entries = await entryService.getModifiedNewsEntries(limit, page);
       res.status(200).json({ entries });
   } catch (err) {
     next(err)
