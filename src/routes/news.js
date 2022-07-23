@@ -8,7 +8,7 @@ const { check } = require('express-validator');
 
 
 
-router.get("/", entryController.getNewsEntries);
+router.get("/:limit/:page", entryController.getNewsEntries);
 
 router.get('/:id', entryController.getNewsEntryById)
 router.put("/:id" ,entryController.updateNewsEntry);
