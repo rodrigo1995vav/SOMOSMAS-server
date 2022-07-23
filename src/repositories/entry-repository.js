@@ -32,11 +32,14 @@ const updateEntry = async (newContent) =>{
   return updatedEntry
 }
 
-const findAllNews = async() => {
+const findAllNews = async(limit, page) => {
 
-    const entries = await Entry.findAll({ where:{ type:"news" } });
+    const offset = limit * (page - 1);
+    const entries = await Entry.findAndCountAll({ where:{ type:"news" }, offset, limit });
+
+    const pages = Math.ceil(entries.count / limit);
     
-    return entries;
+    return { result: entries.rows, count: entries.count, pages };
   }
   const deleteEntryById = async(id) => {
    
