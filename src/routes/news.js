@@ -10,6 +10,8 @@ const { check } = require('express-validator');
 
 router.get("/:limit/:page", entryController.getNewsEntries);
 
+router.get("/", entryController.getNewsEntries);
+
 router.get('/:id', entryController.getNewsEntryById)
 router.put("/:id" ,entryController.updateNewsEntry);
 router.delete('/:id',entryController.deleteEntry)

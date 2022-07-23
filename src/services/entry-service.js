@@ -42,6 +42,9 @@ const getModifiedNewsEntries = async(limit, page) => {
     ) 
   )
 
+
+  if( !page && !limit )return modifiedEntries;
+
   return { result: modifiedEntries, ...entries };
 }
 

@@ -68,8 +68,12 @@ const updateNewsEntry = async (req,res,next)=>{
 
 const getNewsEntries = async(req, res, next) => {
 
-  const page = Number(req.params.page)
-  const limit = Number(req.params.limit)
+  let page, limit;
+
+  if( req.params.page && req.params.limit ){
+    page = Number(req.params.page)
+    limit = Number(req.params.limit)
+  }
 
   try {
       const entries = await entryService.getModifiedNewsEntries(limit, page);
