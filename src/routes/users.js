@@ -6,6 +6,7 @@ const checkAdminUser = require("../middlewares/authentication/check-admin-user")
 router.get("/", checkAdminUser, userController.getUsers);
 router.delete("/delete/:id", checkAdminUser, userController.deleteUser);
 router.put("/update", checkAdminUser, userController.updateUser)
+router.put("/updateProfile", userController.updateProfile)
 
 module.exports = router
 
