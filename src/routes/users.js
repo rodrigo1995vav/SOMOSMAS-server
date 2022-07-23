@@ -7,6 +7,7 @@ router.get("/", checkAdminUser, userController.getUsers);
 router.delete("/delete/:id", checkAdminUser, userController.deleteUser);
 router.put("/update", checkAdminUser, userController.updateUser)
 router.put("/updateProfile", userController.updateProfile)
+router.delete("/deleteProfile/:id", userController.deleteUser);
 
 module.exports = router
 
