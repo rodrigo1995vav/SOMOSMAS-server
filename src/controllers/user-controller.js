@@ -1,3 +1,4 @@
+const { checkFileAndUpload } = require('../services/fileServices');
 const userService = require('../services/user-service')
 
 const getUsers = async (req, res, next) => {
@@ -28,8 +29,10 @@ const deleteUser = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
     const newUserData = req.body
+    console.log(newUserData)    
     try {
-        const users = await userService.updateUserById(newUserData)        
+        const users = await userService.updateUserById(newUserData)  
+          
         res.status(200).json(users)
     } catch (err) {
         
@@ -37,10 +40,28 @@ const updateUser = async (req, res, next) => {
     }
 }
 
+const updateProfile = async (req,res,next)=>{
+    console.log(req)
+     const image = await checkFileAndUpload(req.file)
+     console.log(image)
+     console.log("hola")
+     
+      //const newsEntryDto = new EntryDto ({...req.body, id: req.params.id, type: 'news'});
+      const profileDto = {...req.body,  image: image}
+      
+      try {
+        const users = await userService.updateUserById(profileDto)
+        res.status(200).json(users)
+      } catch (err) {
+        next(err)
+      }
+  }
+
 
 
 module.exports = {
     getUsers,
     deleteUser,
-    updateUser
+    updateUser,
+    updateProfile
 }

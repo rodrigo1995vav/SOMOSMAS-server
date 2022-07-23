@@ -90,7 +90,7 @@ const updateUserById = async (updatedUserData) => {
     if (user[0] === 0){
         return "User does not exist"
     }
-    return "User information updated"
+    return updatedUserData
 }
 
 module.exports = {
