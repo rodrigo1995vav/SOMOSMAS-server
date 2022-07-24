@@ -33,11 +33,14 @@ class EntryDto {
 }
 
 const deleteEntry = async (req, res, next) => {
-  const entryId = Number(req.params.id);
+const entryId = Number(req.params.id);
+
+ 
 
   try {
     const deletedEntry = await entryService.deleteEntryById(entryId);
     res.status(200).json({ deleted: deletedEntry });
+      
   } catch (err) {
     next(err);
   }
@@ -69,9 +72,16 @@ const updateNewsEntry = async (req, res, next) => {
 };
 
 const getNewsEntries = async (req, res, next) => {
+
+  let page, limit;
+
+  if( req.params.page && req.params.limit ){
+    page = Number(req.params.page)
+    limit = Number(req.params.limit)
+  }
   try {
-    const entries = await entryService.getModifiedNewsEntries();
-    res.status(200).json({ entries });
+    const entries = await entryService.getModifiedNewsEntries(limit, page);
+      res.status(200).json({ entries });
   } catch (err) {
     next(err);
   }

@@ -26,11 +26,11 @@ const updateEntry = async (newContent) =>{
         return entry
 }
 
-const getModifiedNewsEntries = async() => {
+const getModifiedNewsEntries = async(limit, page) => {
   
-  const entries = await entryRepository.findAllNews();
+  const entries = await entryRepository.findAllNews(limit, page);
 
-  const modifiedEntries = entries.map( ({id, name, image,content,type, createdAt }) => (
+  const modifiedEntries = entries.result.map( ({id, name, image,content,type, createdAt }) => (
       {
         id,
         name,
@@ -42,7 +42,10 @@ const getModifiedNewsEntries = async() => {
     ) 
   )
 
-  return modifiedEntries;
+
+  if( !page && !limit )return modifiedEntries;
+
+  return { result: modifiedEntries, ...entries };
 }
 
 const getNewsById = async( id )=>{
