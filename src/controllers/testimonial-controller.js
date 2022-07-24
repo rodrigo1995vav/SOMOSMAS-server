@@ -14,13 +14,13 @@ const getAllTestimonials = async (req, res, next) => {
         res.json(allTestimonials)
     }
     catch (err) {
-        
+        console.log(err)
         next(err)
     }
 
 }
 
-const deleteTestimonial = async (req, res) =>{
+const deleteTestimonial = async (req, res) => {
 
     const testimonialId = Number(req.params.id)
 
@@ -31,9 +31,9 @@ const deleteTestimonial = async (req, res) =>{
 
     } catch (err) {
 
-        res.status(500).json({err: err.message})
+        res.status(500).json({ err: err.message })
     }
-}  
+}
 const createNewTestimonial = async (req, res) => {
     try {
         console.log(req)
@@ -44,6 +44,7 @@ const createNewTestimonial = async (req, res) => {
         })
         res.status(201).json(testimonialSaved)
     } catch (err) {
+
         res.status(500).json(err);
     }
 }
