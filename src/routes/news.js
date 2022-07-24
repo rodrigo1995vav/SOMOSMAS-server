@@ -16,7 +16,6 @@ router.delete('/:id',entryController.deleteEntry)
 router.post("/", [
     check('name', 'name field is required').not().isEmpty(),
     check('content', 'content field is required').not().isEmpty(),
-    check('categoryId', 'categoryId field is required').isInt(),
     validateFields,
     validateFile,
   ],
