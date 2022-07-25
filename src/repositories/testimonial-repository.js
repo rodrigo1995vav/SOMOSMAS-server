@@ -8,7 +8,12 @@ const getAllTestimonials = async (limit , page) => {
     const { count, rows } = await Testimonial.findAndCountAll({
         offset: offset,
         limit: limit,
-    })
+        order: [
+            ['updatedAt', 'DESC'],
+        ]
+    },
+    
+    )
         if(count === 0 ){
             return null
         }
