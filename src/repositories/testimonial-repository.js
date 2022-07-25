@@ -21,10 +21,16 @@ const getAllTestimonials = async (limit , page) => {
     return { total_testimonials: count, testimonials: rows , pageCount}
 }
 
-const createTestimonial = async (testimonial) => {
-    const testimonialStored = await Testimonial.create(testimonial)
+const saveTestimonial = async (testimonial) => {
+    const testimonialStored =  Testimonial.build(testimonial,{isNewRecord: !testimonial.id})
+    await testimonialStored.save();
     return testimonialStored
 }
+
+
+
+
+
 
 
 const deleteTestimonial = async (id) =>{
@@ -38,10 +44,14 @@ const deleteTestimonial = async (id) =>{
   return testimonialInstance
 }
 
-
+const getTestimonialByUserId = async (id)=>{
+    const testimonialInstance =  await Testimonial.findOne({ where: { userId: id } })
+    return testimonialInstance
+}
 module.exports= {
     getAllTestimonials,
     deleteTestimonial,
-    createTestimonial
+    saveTestimonial,
+    getTestimonialByUserId
 
 }

@@ -4,7 +4,7 @@ const emailService = require("../services/send-email");
 const storeContact = async (req, res, next) => {
   try {
     const newContact = req.body;
-    console.log(req.body);
+    console.log(req.body.email);
     emailService.sendEmail({
       to: newContact.email,
       subject: "SOMOS MAS - Gracias por contactarte", 
@@ -13,7 +13,7 @@ const storeContact = async (req, res, next) => {
     const contactStored = await contactService.createContact(newContact);
     res.json(contactStored);
   } catch (err) {
-    res.json(err);
+    next(err);
   }
 };
 
