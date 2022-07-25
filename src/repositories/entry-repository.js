@@ -35,12 +35,16 @@ const updateEntry = async (newContent) =>{
 const findAllNews = async(limit, page) => {
 
     if( !limit && !page ){
-      const entries = await Entry.findAndCountAll({ where:{ type:"news" } });
+      const entries = await Entry.findAndCountAll({ where:{ type:"news" },order: [
+        ['createdAt', 'DESC'],
+    ], });
       return { result: entries.rows };
     }
 
     const offset = limit * (page - 1);
-    const entries = await Entry.findAndCountAll({ where:{ type:"news" }, offset, limit });
+    const entries = await Entry.findAndCountAll({ where:{ type:"news" }, offset, limit, order: [
+      ['createdAt', 'DESC'],
+  ]});
     
     const pages = Math.ceil(entries.count / limit);
     
