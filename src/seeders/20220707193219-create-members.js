@@ -28,3 +28,9 @@ module.exports = {
     await queryInterface.bulkDelete('members', null,);
   }
 };
+
+
+
+[
+
+]
