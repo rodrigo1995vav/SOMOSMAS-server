@@ -93,6 +93,28 @@ describe('PUT /users/update testing', () => {
     })
 })
 
-describe('DELETE /users testing', () => {
+describe('DELETE /users/deleteProfile testing', () => {
+    it('deletes a User', async () => {
+        const user = await saveUser()
+        const deleteResponse = await request(app)
+            .delete(`/users/deleteProfile/${user.id}`)
+            .expect(200)
+    })
+})
 
+describe('DELETE /users/delete testing', () => {
+    it('deletes a User', async () => {
+        const user = await saveUser()
+        const token = login();
+        const deleteResponse = await request(app)
+            .delete(`/users/delete/${user.id}`)
+            .set('Authorization', 'bearer ' + token)
+            .expect(200)
+    })
+    it('can only be accessed if the user is logged as an admin', async () => {
+        const user = await saveUser()
+        const deleteResponse = await request(app)
+            .delete(`/users/delete/${user.id}`)
+            .expect(401)
+    })
 })
