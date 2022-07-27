@@ -1,18 +1,18 @@
 const memberService = require("../services/member-service")
 
-const getListMember = async (req,res)=>{
+const getListMember = async (req, res) => {
     try {
-    const { query } = req;
-        
-     const members= await memberService.getListAllMembers(query)
+        const { query } = req;
 
-     res.status(200).json(members) 
+        const members = await memberService.getListAllMembers(query)
+
+        res.status(200).json(members)
     } catch (err) {
-        res.status(500).json(err.message)
+        res.status(500).json(err)
         console.log(err)
     }
 }
 
-module.exports ={
+module.exports = {
     getListMember
 }
