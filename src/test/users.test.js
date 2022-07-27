@@ -62,6 +62,31 @@ describe('PUT /users/updateProfile testing', () => {
             })
             .expect(200)
     })
+    it('returns an error if a file is attached and its not an image', async () => {
+        const user = await saveUser()
+        const filePath = path.join(__dirname, './test-data/text.txt');
+        const updateResponse = await request(app)
+            .put('/users/updateProfile')
+            .type('form')
+            .field('id', user.id)
+            .attach('image', filePath)
+            .expect(400)
+
+            expect( updateResponse.body.error[0].msg ).toBe('El archivo debe ser una imagen.')
+    })
+    it('returns a message indicating that the id does not exist', async () => {
+        const user = await saveUser()
+        const updateResponse = await request(app)
+            .put('/users/updateProfile')
+            .send({
+                firstName:"new firstName",
+                lastName: "new lastName",
+                email: "new email",
+                id: user.id + 1
+            })
+            .expect(200)
+        expect( updateResponse.body).toBe('User does not exist')
+    })
 })
 
 describe('PUT /users/update testing', () => {
@@ -78,6 +103,21 @@ describe('PUT /users/update testing', () => {
                 id: user.id
             })
             .expect(200)
+    })
+    it('returns a message indicating that the id does not exist', async () => {
+        const user = await saveUser()
+        const token = login();
+        const updateResponse = await request(app)
+            .put('/users/update')
+            .set('Authorization', 'bearer ' + token)
+            .send({
+                firstName:"new firstName",
+                lastName: "new lastName",
+                email: "new email",
+                id: user.id + 1
+            })
+            .expect(200)
+        expect( updateResponse.body).toBe('User does not exist')
     })
     it('can only be accessed if the user is logged as an admin', async () => {
         const user = await saveUser()
