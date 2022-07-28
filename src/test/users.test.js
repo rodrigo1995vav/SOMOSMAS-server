@@ -74,7 +74,7 @@ describe('PUT /users/updateProfile testing', () => {
 
             expect( updateResponse.body.error[0].msg ).toBe('El archivo debe ser una imagen.')
     })
-    it('returns a message indicating that the id does not exist', async () => {
+    it('returns an error indicating that the id does not exist', async () => {
         const user = await saveUser()
         const updateResponse = await request(app)
             .put('/users/updateProfile')
@@ -84,8 +84,8 @@ describe('PUT /users/updateProfile testing', () => {
                 email: "new email",
                 id: user.id + 1
             })
-            .expect(200)
-        expect( updateResponse.body).toBe('User does not exist')
+            .expect(400)
+        expect( updateResponse.body.message).toBe("No se encontró al usuario")
     })
 })
 
@@ -104,7 +104,7 @@ describe('PUT /users/update testing', () => {
             })
             .expect(200)
     })
-    it('returns a message indicating that the id does not exist', async () => {
+    it('returns an error indicating that the id does not exist', async () => {
         const user = await saveUser()
         const token = login();
         const updateResponse = await request(app)
@@ -116,8 +116,8 @@ describe('PUT /users/update testing', () => {
                 email: "new email",
                 id: user.id + 1
             })
-            .expect(200)
-        expect( updateResponse.body).toBe('User does not exist')
+            .expect(400)
+        expect( updateResponse.body.message).toBe("No se encontró al usuario")
     })
     it('can only be accessed if the user is logged as an admin', async () => {
         const user = await saveUser()
@@ -140,6 +140,13 @@ describe('DELETE /users/deleteProfile testing', () => {
             .delete(`/users/deleteProfile/${user.id}`)
             .expect(200)
     })
+    it('returns an error indicating that the id does not exist', async () => {
+        const user = await saveUser()
+        const deleteResponse = await request(app)
+            .delete(`/users/deleteProfile/${user.id+1}`)
+            .expect(400)
+        expect( deleteResponse.body.message).toBe("No se encontró al usuario")
+    })
 })
 
 describe('DELETE /users/delete testing', () => {
@@ -150,6 +157,15 @@ describe('DELETE /users/delete testing', () => {
             .delete(`/users/delete/${user.id}`)
             .set('Authorization', 'bearer ' + token)
             .expect(200)
+    })
+    it('returns an error indicating that the id does not exist', async () => {
+        const user = await saveUser()
+        const token = login();
+        const deleteResponse = await request(app)
+            .delete(`/users/delete/${user.id+1}`)
+            .set('Authorization', 'bearer ' + token)
+            .expect(400)
+        expect( deleteResponse.body.message).toBe("No se encontró al usuario")
     })
     it('can only be accessed if the user is logged as an admin', async () => {
         const user = await saveUser()
