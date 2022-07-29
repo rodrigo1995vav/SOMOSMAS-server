@@ -30,12 +30,11 @@ const deleteTestimonial = async (req, res, next) => {
         res.json({ deletedTestimonial: deletedTestimonial })
 
     } catch (err) {
-
         next(err)
     }
 }
 const createNewTestimonial = async (req, res, next) => {
- 
+
     try {
         const testimonialSaved = await testimonialService.createTestimonial({
             ...req.body,
