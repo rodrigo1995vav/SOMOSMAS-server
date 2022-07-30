@@ -7,8 +7,8 @@
         "_migrate": "sequelize db:migrate",
         "_seed": "sequelize db:seed:all",
         "db_complete": "node create_db && sequelize db:migrate && sequelize db:seed:all",
-        "start": "node ./bin/www",
-        "tests": "jest"
+        "test": "jest --watchAll --detectOpenHandles ",
+        "start": "node ./bin/www"
     },
     "dependencies": {
         "@sendgrid/mail": "^7.7.0",
