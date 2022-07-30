@@ -1,6 +1,6 @@
-const app = require('../src/app');
+const app = require('../app');
 const request = require('supertest');
-const { InvalidTokenError, ExpiredTokenError } = require('../src/errors/auth-errors');
+const { InvalidTokenError, ExpiredTokenError } = require('../errors/auth-errors');
 const URL_BASE = '/testimonials'
 let nextTestimonialDeleted;
 async function login(user) {
