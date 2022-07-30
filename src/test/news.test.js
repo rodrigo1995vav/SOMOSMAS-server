@@ -104,6 +104,19 @@ describe('GET /news testing', () => {
 
   })
 
+  it('returns an error message if the entry  does not exist', async()=> {
+
+    const response = await createEntry('This is a test name');
+
+    const { id }   = response.body.entry; 
+    const getResponse = await request(app)
+      .get(`/news/${ id + 1 }`)               // Forces an incorrect id
+
+    expect(getResponse.status).toBe(400);
+    expect(getResponse.body.message).toBe('La novedad no existe')
+
+  })
+
   it('returns paginated data and info about number of records and pages', async() => {
 
     await Entry.destroy({where:{}});
