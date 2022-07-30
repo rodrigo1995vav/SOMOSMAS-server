@@ -120,6 +120,18 @@ describe('DELETE /testimonials/:id', () => {
             expect(response.body.error).toBe('Not authorized');
         })
 
+        test("admin user's valid token and id INVALID", async () => {
+            //testimonial ID
+            const id = 10000 //INVALID ID        
+            const error = new Error('El testimonio que desea eliminar no existe')
+
+            const { token } = await login(userAdmin)
+
+            const response = await request(app).delete(`${URL_BASE}/${id}`).set('Authorization', `Bearer ${token}`).send();
+            expect(response.statusCode).toBe(500)
+            expect(response.body).toEqual(error.message);
+        })
+
     })
 
     describe('creation of testimonials POST /testimonias', () => {
@@ -236,17 +248,7 @@ describe('DELETE /testimonials/:id', () => {
             expect(response.body.deletedTestimonial).toBe(1)
         })
 
-        test("admin user's valid token and id INVALID", async () => {
-            //testimonial ID
-            const id = 10000 //INVALID ID        
-            const error = new Error('El testimonio que desea eliminar no existe')
 
-            const { token } = await login(userAdmin)
-
-            const response = await request(app).delete(`${URL_BASE}/${id}`).set('Authorization', `Bearer ${token}`).send();
-            expect(response.statusCode).toBe(500)
-            expect(response.body).toEqual(error.message);
-        })
     })
 })
 
