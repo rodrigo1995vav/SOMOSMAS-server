@@ -5,10 +5,9 @@ const URL_BASE = '/testimonials'
 let nextTestimonialDeleted;
 async function login(user) {
     const login = await request(app).post('/auth/login').send(user);
-
     return { token: login.body.accessToken, userId: login.body.user.id };
-
 }
+
 const userStandard = {
     email: 'jchellam0@cbsnews.com',
     password: 'lJGRQsZ9Pnx'
