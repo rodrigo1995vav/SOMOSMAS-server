@@ -2,10 +2,10 @@ const app = require('../src/app');
 const request = require('supertest');
 const { InvalidTokenError, ExpiredTokenError } = require('../src/errors/auth-errors');
 const URL_BASE = '/testimonials'
-
+let nextTestimonialDeleted;
 async function login(user) {
     const login = await request(app).post('/auth/login').send(user);
-    console.log(login)
+
     return { token: login.body.accessToken, userId: login.body.user.id };
 
 }
@@ -123,11 +123,111 @@ describe('DELETE /testimonials/:id', () => {
 
     })
 
+    describe('creation of testimonials POST /testimonias', () => {
+
+        describe('AUTHENTICATION TO CREATE TESTIMONIAL', () => {
+
+            test('creation of testimonials without token', async () => {
+                const token = ""
+                const error = new InvalidTokenError;
+                const response = await request(app).post(`${URL_BASE}`).set('Authorization', `Bearer ${token}`).send({});
+
+                expect(response.statusCode).toBe(error.code)
+                expect(response.body.name).toBe(error.name);
+                expect(response.body.message).toBe(error.message);
+                expect(response.body.code).toBe(error.code);
+            })
+
+
+            test('creation of testimonials with invalid token', async () => {
+                const token = "unTokenInvalido"
+                const error = new ExpiredTokenError;
+                const response = await request(app).post(`${URL_BASE}`).set('Authorization', `Bearer ${token}`).send({});
+
+                expect(response.statusCode).toBe(error.code)
+                expect(response.body.name).toBe(error.name);
+                expect(response.body.message).toBe(error.message);
+                expect(response.body.code).toBe(error.code);
+            })
+        })
+
+        describe('FIELD VALIDATION ERRORS', () => {
+
+            test('creation of testimonials with valid token and errors validation fields', async () => {
+
+                const { token, userId } = await login(userStandard)
+                const testimonial = {
+                    name: "",
+                    content: "",
+                    image: "",
+                    userId: userId
+                }
+                const response = await request(app).post(`${URL_BASE}`).set('Authorization', `Bearer ${token}`).send(testimonial);
+
+                expect(response.statusCode).toBe(400)
+                expect(response.body).toBeDefined()
+                expect(Array.isArray(response.body.errors)).toBeDefined()
+                expect(Array.isArray(response.body.errors)).toBe(true)
+                //errors name
+                expect(response.body.errors).toEqual([
+                    {
+                        "value": "",
+                        "msg": "The name field can't be empty",
+                        "param": "name",
+                        "location": "body"
+                    },
+                    {
+                        "value": "",
+                        "msg": "The name field must at least be 2 characters long",
+                        "param": "name",
+                        "location": "body"
+                    },
+                    {
+                        "value": "",
+                        "msg": "The content field can't be empty",
+                        "param": "content",
+                        "location": "body"
+                    },
+                    {
+                        "value": "",
+                        "msg": "The content field must at least be 10 characters long",
+                        "param": "content",
+                        "location": "body"
+                    }
+                ])
+            })
+        })
+
+        describe('SUCCESSFUL TESTIMONIAL ', () => {
+
+            test('creation testimonial', async () => {
+                const { token, userId } = await login(userStandard)
+
+                const testimonial = {
+                    name: "nuevo testimonio",
+                    content: "descripción del nuevo testimonio",
+                    image: "key de imagen",
+                    userId: userId
+                }
+                const response = await request(app).post(`${URL_BASE}`).set('Authorization', `Bearer ${token}`).send(testimonial);
+                nextTestimonialDeleted = response.body.id
+
+                expect(response.statusCode).toBe(201)
+                expect(response.body).toBeDefined()
+                expect(response.body.name).toEqual(testimonial.name)
+                expect(response.body.content).toEqual(testimonial.content)
+                expect(response.body.userId).toEqual(testimonial.userId)
+            })
+        })
+
+    })
+
+
     describe('SUCCESS DELETE AUTHORIZATION /testimonials/:id', () => {
 
         test("admin user's valid token and id VALID", async () => {
             //testimonial ID
-            const id = 1 //VALID ID
+            const id = nextTestimonialDeleted//VALID ID
             const { token } = await login(userAdmin)
 
             const response = await request(app).delete(`${URL_BASE}/${id}`).set('Authorization', `Bearer ${token}`).send();
@@ -151,100 +251,3 @@ describe('DELETE /testimonials/:id', () => {
     })
 })
 
-describe('creation of testimonials POST /testimonias', () => {
-
-    describe('AUTHENTICATION TO CREATE TESTIMONIAL', () => {
-
-        test('creation of testimonials without token', async () => {
-            const token = ""
-            const error = new InvalidTokenError;
-            const response = await request(app).post(`${URL_BASE}`).set('Authorization', `Bearer ${token}`).send({});
-
-            expect(response.statusCode).toBe(error.code)
-            expect(response.body.name).toBe(error.name);
-            expect(response.body.message).toBe(error.message);
-            expect(response.body.code).toBe(error.code);
-        })
-
-
-        test('creation of testimonials with invalid token', async () => {
-            const token = "unTokenInvalido"
-            const error = new ExpiredTokenError;
-            const response = await request(app).post(`${URL_BASE}`).set('Authorization', `Bearer ${token}`).send({});
-
-            expect(response.statusCode).toBe(error.code)
-            expect(response.body.name).toBe(error.name);
-            expect(response.body.message).toBe(error.message);
-            expect(response.body.code).toBe(error.code);
-        })
-    })
-
-    describe('FIELD VALIDATION ERRORS', () => {
-
-        test('creation of testimonials with valid token and errors validation fields', async () => {
-
-            const { token, userId } = await login(userStandard)
-            const testimonial = {
-                name: "",
-                content: "",
-                image: "",
-                userId: userId
-            }
-            const response = await request(app).post(`${URL_BASE}`).set('Authorization', `Bearer ${token}`).send(testimonial);
-
-            expect(response.statusCode).toBe(400)
-            expect(response.body).toBeDefined()
-            expect(Array.isArray(response.body.errors)).toBeDefined()
-            expect(Array.isArray(response.body.errors)).toBe(true)
-            //errors name
-            expect(response.body.errors).toEqual([
-                {
-                    "value": "",
-                    "msg": "The name field can't be empty",
-                    "param": "name",
-                    "location": "body"
-                },
-                {
-                    "value": "",
-                    "msg": "The name field must at least be 2 characters long",
-                    "param": "name",
-                    "location": "body"
-                },
-                {
-                    "value": "",
-                    "msg": "The content field can't be empty",
-                    "param": "content",
-                    "location": "body"
-                },
-                {
-                    "value": "",
-                    "msg": "The content field must at least be 10 characters long",
-                    "param": "content",
-                    "location": "body"
-                }
-            ])
-        })
-    })
-
-    describe('SUCCESSFUL TESTIMONIAL ', () => {
-
-        test('creation testimonial', async () => {
-            const { token, userId } = await login(userStandard)
-
-            const testimonial = {
-                name: "nuevo testimonio",
-                content: "descripción del nuevo testimonio",
-                image: "key de imagen",
-                userId: userId
-            }
-            const response = await request(app).post(`${URL_BASE}`).set('Authorization', `Bearer ${token}`).send(testimonial);
-
-            expect(response.statusCode).toBe(201)
-            expect(response.body).toBeDefined()
-            expect(response.body.name).toEqual(testimonial.name)
-            expect(response.body.content).toEqual(testimonial.content)
-            expect(response.body.userId).toEqual(testimonial.userId)
-        })
-    })
-
-})
