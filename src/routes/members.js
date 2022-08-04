@@ -7,6 +7,8 @@ const router = express.Router();
 
 router.put('/:id', checkAdminUser, memberController.updateMember)
 
+router.delete('/:id', memberController.deleteMember)
+
 router.get('/',memberController.getListMember) 
 
 module.exports = router

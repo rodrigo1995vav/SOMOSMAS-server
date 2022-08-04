@@ -1,4 +1,4 @@
-const memberService = require("../services/member-service")
+// const memberService = require("../services/member-service")
 
 const getListMember = async (req, res) => {
     try {
