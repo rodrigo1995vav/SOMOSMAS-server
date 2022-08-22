@@ -16,12 +16,6 @@ const deleteMember = async (req, res, next) => {
   }
 };
 
-
-
-
-const memberService = require("../services/member-service")
-const fileServices = require("../services/fileServices");
-
 const updateMember = async (req, res, next) => {
     try {
         const id = req.params.id
