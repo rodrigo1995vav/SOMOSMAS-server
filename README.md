@@ -1,28 +1,24 @@
 # Server Base - Proyecto ONG
-
 This is the server side of the WebApp SOMOS MAS 
 
 
 ## General info
-
-Responsive WebApp created for SOMOS MAS ONG with the ALKEMY Team
-
+Responsive WebApp created for SOMOS MAS ONG with the ALKEMY Team.
 It is created to give people an in-depth view of which are the goals and projects the ONG is involved in.
 This makes the app a site with many different pages and customizable components. So admin roles can modify it as they please.
 
 ## Technologies and frameworks
+### Server is created with
+    *Node:v16.14.2
+    *Express:v4.16.1
+    *Sequelize:v6.3.5
 
-Server is created with:
-*Node:v16.14.2
-*Express:v4.16.1
-*Sequelize:v6.3.5
+### Database
+    *MYSQL
 
-Database:
-*MYSQL
-
-Client is created with:
-*React:v18.2.0  
-*Redux:v8.0.2
+### Client is created with
+    *React:v18.2.0  
+    *Redux:v8.0.2
 
 
 
