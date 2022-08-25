@@ -8,7 +8,7 @@ It is created to give people an in-depth view of which are the goals and project
 This makes the app a site with many different pages and customizable components. So admin roles can modify it as they please.
 
 ## Technologies and frameworks
-### Server is created with
+### Server
     *Node:v16.14.2
     *Express:v4.16.1
     *Sequelize:v6.3.5
@@ -16,7 +16,7 @@ This makes the app a site with many different pages and customizable components.
 ### Database
     *MYSQL
 
-### Client is created with
+### Client
     *React:v18.2.0  
     *Redux:v8.0.2
 
