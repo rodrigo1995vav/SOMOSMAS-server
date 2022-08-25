@@ -1,6 +1,10 @@
 # Server Base - Proyecto ONG
 This is the server side of the WebApp SOMOS MAS 
 
+# Link to client 
+
+https://github.com/rodrigo1995vav/SOMOSMAS-client
+
 
 ## General info
 Responsive WebApp created for SOMOS MAS ONG with the ALKEMY Team.
